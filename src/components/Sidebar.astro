@@ -1,0 +1,17 @@
+--- 
+import { Image } from 'astro:assets';
+import myImage from "../assets/Mark.jpg";
+import Navigation from "./Navigation";
+---
+
+<div class="flex bg-gray-100 px-6 xl:fixed xl:inset-y-0 xl:z-50 xl:w-72 xl:flex-col space-y-12">
+        <Image 
+            src={myImage} 
+            alt="Mark Takacs' Ai enhanced profile picture" 
+            class="mx-auto h-40 w-40 mt-12 rounded-full border-8 border-white shadow-xl"
+            format="avif" 
+            quality="mid" 
+        />
+
+        <Navigation />
+</div>
