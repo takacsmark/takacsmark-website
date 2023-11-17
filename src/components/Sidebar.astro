@@ -4,14 +4,17 @@ import myImage from "../assets/Mark.jpg";
 import Navigation from "./Navigation";
 ---
 
-<div class="flex px-6 xl:fixed xl:inset-y-0 xl:z-50 xl:w-72 xl:flex-col space-y-12 shadow-md">
-        <Image 
-            src={myImage} 
-            alt="Mark Takacs' Ai enhanced profile picture" 
-            class="mx-auto h-40 w-40 mt-12 rounded-full border-8 border-white shadow-xl"
-            format="avif" 
-            quality="mid" 
-        />
-
-        <Navigation />
+<div class="flex px-6 xl:fixed xl:inset-y-0 xl:z-50 xl:w-72 xl:flex-col xl:space-y-12 xl:shadow-md">
+        <div class="mt-12">
+            <Image 
+                src={myImage} 
+                alt="Mark Takacs' Ai enhanced profile picture" 
+                class="mx-auto h-40 w-40 rounded-full border-8 border-white shadow-xl"
+                format="avif" 
+                quality="mid" 
+            />
+        </div>
+        <div class="flex grow h-full">
+            <Navigation client:load />
+        </div>
 </div>

@@ -1,15 +1,23 @@
-import {
-    AcademicCapIcon,
-    Bars3Icon,
-    BookOpenIcon,
-    PaintBrushIcon,
-} from "@heroicons/react/24/outline"
+import { Disclosure } from "@headlessui/react";
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import type { ReactElement } from "react";
 
 const navigation = [
-    { name: "Categories", href: "#", icon: BookOpenIcon, current: false },
-    { name: "Tags", href: "#", icon: PaintBrushIcon, current: false },
-    { name: "Docker Book", href: "#", icon: AcademicCapIcon, current: false },
-    { name: "About", href: "#", icon: Bars3Icon, current: false },
+    { name: "Home", href: "/", current: false },
+    { name: "Categories", href: "#", current: false },
+    { name: "Tags", href: "#", current: false },
+    { name: "Docker Book", href: "#", current: false },
+    {
+        name: "More",
+        current: false,
+        children: [
+            { name: "About Me", href: "#", current: false },
+            { name: "Terms & Conditions", href: "#", current: false },
+            { name: "Privact Policy", href: "#", current: false },
+            { name: "Return & Refund Policy", href: "#", current: false },
+            { name: "Cookie Settings", href: "#", current: false },
+        ],
+    },
 ];
 
 const social = [
@@ -27,11 +35,11 @@ const social = [
         ),
     },
     {
-        name: "Twitter",
-        href: "https://twitter.com/takacsmark",
+        name: "X",
+        href: "https://x.com/takacsmark",
         icon: (props: any) => (
             <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                <path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z" />
             </svg>
         ),
     },
@@ -101,26 +109,64 @@ const Navigation = () => {
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                     <ul role="list" className="-mx-2 space-y-1">
-                        {navigation.map((item: { name: string, href: string, icon: any, current: boolean }) => (
+                        {navigation.map((item) => (
                             <li key={item.name}>
-                                <a
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current
-                                            ? "bg-gray-800 text-white"
-                                            : "text-gray-600 hover:text-white hover:bg-gray-800",
-                                        "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                    )}
-                                >
-                                    <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                    {item.name}
-                                </a>
+                                {!item.children ? (
+                                    <a
+                                        href={item.href}
+                                        className={classNames(
+                                            item.current ? "bg-gray-50" : "hover:bg-gray-50",
+                                            "block rounded-md py-2 pr-2 pl-10 text-sm leading-6 font-semibold text-gray-700"
+                                        )}
+                                    >
+                                        {item.name}
+                                    </a>
+                                ) as ReactElement<any> : (
+                                    <Disclosure as="div">
+                                        {({ open }) => (
+                                            <>
+                                                <Disclosure.Button
+                                                    className={classNames(
+                                                        item.current ? "bg-gray-50" : "hover:bg-gray-50",
+                                                        "flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 font-semibold text-gray-700"
+                                                    )}
+                                                >
+                                                    {/* @ts-expect-error Server Component */}
+                                                    <ChevronRightIcon
+                                                        className={classNames(
+                                                            open ? "rotate-90 text-gray-500" : "text-gray-400",
+                                                            "h-5 w-5 shrink-0"
+                                                        )}
+                                                        aria-hidden="true"
+                                                    />
+                                                    {item.name}
+                                                </Disclosure.Button>
+                                                <Disclosure.Panel as="ul" className="mt-1 px-2">
+                                                    {item.children.map((subItem) => (
+                                                        <li key={subItem.name}>
+                                                            <Disclosure.Button
+                                                                as="a"
+                                                                href={subItem.href}
+                                                                className={classNames(
+                                                                    subItem.current ? "bg-gray-50" : "hover:bg-gray-50",
+                                                                    "block rounded-md py-2 pr-2 pl-9 text-sm leading-6 text-gray-700"
+                                                                )}
+                                                            >
+                                                                {subItem.name}
+                                                            </Disclosure.Button>
+                                                        </li>
+                                                    )) as ReactElement<any>[]}
+                                                </Disclosure.Panel>
+                                            </>
+                                        ) as ReactElement<any>}
+                                    </Disclosure>
+                                )}
                             </li>
                         ))}
                     </ul>
                 </li>
-                <li className="mt-auto mb-4">
-                    <div className="flex space-x-4">
+                <li className="-mx-2 mt-auto mb-4 p-2">
+                    <div className="flex justify-evenly">
                         {social.map((item) => (
                             <a key={item.name} href={item.href} className="text-gray-500 hover:text-gray-400" target="_blank">
                                 <span className="sr-only">{item.name}</span>
