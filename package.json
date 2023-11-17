@@ -24,6 +24,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@heroicons/react": "^2.0.18"
+    "@heroicons/react": "^2.0.18",
+    "@tailwindcss/typography": "^0.5.10"
   }
 }
