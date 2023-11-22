@@ -1,10 +1,18 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
+import remarkToc from "remark-toc";
+import rehypeExternalLinks from "rehype-external-links";
 import react from "@astrojs/react";
 
-import preact from "@astrojs/preact";
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react(), preact({ compat: true, include: "*" })]
+  integrations: [tailwind(), react(), mdx()],
+  markdown: {
+    remarkPlugins: [remarkToc],
+    rehypePlugins: [[rehypeExternalLinks, {
+      target: "_blank"
+    }]]
+  }
 });

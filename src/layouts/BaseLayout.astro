@@ -1,8 +1,8 @@
 ---
-import Sidebar from "../components/Sidebar.astro"
+import Sidebar from "../components/Sidebar.astro";
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -10,27 +10,27 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en" class="h-full scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
 
-		<title>{title}</title>
+    <title>{title}</title>
 
-		<meta name="descrption" content="TODO" />
-        <meta name="author" content="TODO" />
-        <link rel="canonical" href="TODO"/>
-	</head>
-	<body class="h-full">
-		<div>
-			<Sidebar />
-			<main class="xl:pl-72 mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="mx-auto max-w-3xl">
-					<slot />
-				</div>
-			</main>
-		</div>
-	</body>
+    <meta name="descrption" content="TODO" />
+    <meta name="author" content="TODO" />
+    <link rel="canonical" href="TODO" />
+  </head>
+  <body class="h-full">
+    <div>
+      <Sidebar />
+      <main class="xl:pl-72 mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl">
+          <slot />
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
