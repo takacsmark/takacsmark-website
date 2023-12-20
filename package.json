@@ -14,6 +14,8 @@
     "@astrojs/mdx": "^1.1.5",
     "@astrojs/react": "^3.0.5",
     "@astrojs/tailwind": "^5.0.2",
+    "@fontsource/playfair": "^5.0.3",
+    "@fontsource/raleway": "^5.0.16",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "astro": "^3.5.4",

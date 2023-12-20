@@ -10,16 +10,16 @@ const Hero: React.FC<HeroSectionProps> = ({ topNavigationScrollPX }) => {
     <section className="dark:bg-gray-900">
       <Navigation topNavigationScrollPX={topNavigationScrollPX} />
 
-      <div className="relative isolate overflow-hidden">
+      <div className="relative isolate overflow-hidden h-full xl:h-[56rem] 2xl:h-[40rem] min-[1822px]:h-[48rem] min-[2048px]:h-[56rem] min-[2248px]:h-[64rem] min-[2448px]:h-full">
         <img
           src="/images/Hero.jpg"
           alt=""
-          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60 xl:object-contain xl:object-right"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-top opacity-60 xl:object-contain xl:object-right"
         />
         <img
           src="/images/Hero2.jpg"
           alt=""
-          className="invisible absolute inset-0 -z-10 h-full w-full object-cover opacity-60 -scale-x-100 transform-gpu 2xl:visible xl:object-contain xl:object-right"
+          className="invisible absolute inset-0 -z-10 h-full w-full object-cover opacity-60 transform-gpu -scale-x-100 xl:invisible 2xl:object-contain 2xl:visible 2xl:h-full 2xl:w-full 2xl:object-right"
         />
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
