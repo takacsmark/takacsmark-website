@@ -1,21 +1,112 @@
-import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
-import { useEffect, useState } from "react";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import {
+  AdjustmentsVerticalIcon,
+  ArrowUturnLeftIcon,
+  Bars3Icon,
+  BookOpenIcon,
+  BookmarkIcon,
+  ChevronDownIcon,
+  InformationCircleIcon,
+  ShieldCheckIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import { Fragment, createElement, useEffect, useState } from "react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const Dropdown = ({ config }) => (
+  <Menu as="div" className="relative inline-block text-left">
+    <div>
+      <Menu.Button className="-mt-[2px] inline-flex gap-x-1.5 text-lg hover:underline">
+        {config.name}
+        <ChevronDownIcon
+          className="mt-[4px] h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
+      </Menu.Button>
+    </div>
+
+    <Transition
+      as={Fragment}
+      enter="transition ease-out duration-100"
+      enterFrom="transform opacity-0 scale-95"
+      enterTo="transform opacity-100 scale-100"
+      leave="transition ease-in duration-75"
+      leaveFrom="transform opacity-100 scale-100"
+      leaveTo="transform opacity-0 scale-95"
+    >
+      <Menu.Items className="absolute right-0 z-10 mt-2 w-64 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="py-1">
+          {config.children.map((child) => (
+            <Menu.Item>
+              <a
+                href={child.href}
+                className={classNames(
+                  child.current ? "bg-gray-100 text-gray-900" : "text-gray-800",
+                  "group flex items-center px-4 py-2 text-md hover:underline cursor-pointer",
+                )}
+              >
+                {createElement(child.icon, {
+                  className:
+                    "mr-3 h-5 w-5 text-purple-600 group-hover:text-purple-800",
+                  ariaHidden: true,
+                })}
+                {child.name}
+              </a>
+            </Menu.Item>
+          ))}
+        </div>
+      </Menu.Items>
+    </Transition>
+  </Menu>
+);
 
 const navigation = [
-  { name: "Portfolio", href: "#", current: false },
-  { name: "Blog", href: "#", current: false },
-  { name: "Shop", href: "/", current: false },
+  { name: "Portfolio", href: "/portfolio", current: false },
+  { name: "Blog", href: "/blog", current: false },
+  { name: "Shop", href: "/shop", current: false },
   {
     name: "More",
     current: false,
     children: [
-      { name: "About Me", href: "#", current: false },
-      { name: "Terms & Conditions", href: "#", current: false },
-      { name: "Privact Policy", href: "#", current: false },
-      { name: "Return & Refund Policy", href: "#", current: false },
-      { name: "Cookie Settings", href: "#", current: false },
-      { name: "Docker Book", href: "#", current: false },
+      {
+        name: "About Me",
+        href: "/about",
+        current: false,
+        icon: InformationCircleIcon,
+      },
+      {
+        name: "Terms & Conditions",
+        href: "/terms-of-service",
+        current: false,
+        icon: BookmarkIcon,
+      },
+      {
+        name: "Privact Policy",
+        href: "/privacy-policy",
+        current: false,
+        icon: ShieldCheckIcon,
+      },
+      {
+        name: "Return & Refund Policy",
+        href: "/return-refund-policy",
+        current: false,
+        icon: ArrowUturnLeftIcon,
+      },
+      {
+        name: "Cookie Settings",
+        href: "/cookie-settings",
+        current: false,
+        icon: AdjustmentsVerticalIcon,
+      },
+      {
+        name: "Docker Book",
+        href: "/get-started-with-docker-in-your-projects-through-examples",
+        current: false,
+        icon: BookOpenIcon,
+      },
     ],
   },
 ];
@@ -53,8 +144,8 @@ const NavBar: React.FC<NavBarProps> = ({
       aria-label="Global"
     >
       <div className="flex lg:flex-1">
-        <a href="#" className="-m-1.5 p-1.5">
-          <span className="sr-only">Savalera</span>
+        <a href="/" className="-m-1.5 p-1.5">
+          <span className="sr-only">takacsmark.com</span>
           <img
             className="h-8 w-auto"
             src={"/images/Savalera-White-Logo+Name.svg"}
@@ -75,17 +166,19 @@ const NavBar: React.FC<NavBarProps> = ({
         </button>
       </div>
       <div className="hidden lg:flex lg:gap-x-12">
-        {navigation.map((item) => (
-          <a
-            key={item.name}
-            href={item.href}
-            className={`text-lg leading-6 hover:underline underline-offset-4 ${
-              isSticky ? "text-black dark:text-white" : "dark:text-white"
-            } `}
-          >
-            {item.name}
-          </a>
-        ))}
+        {navigation.map((item) =>
+          item.children === undefined ? (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-lg leading-6 hover:underline underline-offset-4 dark:text-white"
+            >
+              {item.name}
+            </a>
+          ) : (
+            <Dropdown config={item} />
+          ),
+        )}
       </div>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
     </nav>

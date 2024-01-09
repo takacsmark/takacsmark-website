@@ -1,9 +1,7 @@
 ---
 import "@fontsource/raleway";
 import "@fontsource/playfair";
-import Hero from "../components/Hero";
-import BlogFeatured from "../components/BlogFeatured";
-import PorfolioFeatured from "../components/PortfolioFeatured.astro";
+import Navigation from "../components/Navigation";
 import Footer from "../components/Footer.astro";
 
 interface Props {
@@ -30,9 +28,8 @@ const { title } = Astro.props;
   </head>
   <body>
     <div>
-      <Hero topNavigationScrollPX={42} client:load />
-      <BlogFeatured />
-      <PorfolioFeatured />
+      <Navigation topNavigationScrollPX={42} client:load />
+      <slot />
       <Footer />
     </div>
   </body>

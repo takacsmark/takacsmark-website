@@ -1,15 +1,6 @@
-import React from "react";
-import Navigation from "./Navigation";
-
-type HeroSectionProps = {
-  topNavigationScrollPX: number;
-};
-
-const Hero: React.FC<HeroSectionProps> = ({ topNavigationScrollPX }) => {
+const Hero = () => {
   return (
     <section className="dark:bg-gray-900">
-      <Navigation topNavigationScrollPX={topNavigationScrollPX} />
-
       <div className="relative isolate overflow-hidden h-full xl:h-[56rem] 2xl:h-[40rem] min-[1822px]:h-[48rem] min-[2048px]:h-[56rem] min-[2248px]:h-[64rem] min-[2448px]:h-full">
         <img
           src="/images/Hero.jpg"
@@ -33,7 +24,7 @@ const Hero: React.FC<HeroSectionProps> = ({ topNavigationScrollPX }) => {
             }}
           />
         </div>
-        <div className="mx-auto max-w-2xl py-60 sm:py-[444px] min-h-screen">
+        <div className="mx-auto max-w-2xl z-0 py-60 md:py-[444px] xl:py-60 min-h-screen xl:mx-0 2xl:mx-auto">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight dark:text-white sm:text-6xl">
               AI for Good
