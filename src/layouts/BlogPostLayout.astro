@@ -5,8 +5,16 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout title={frontmatter.title}>
-  <article class="prose lg:prose-lg">
-    <h1>{frontmatter.title}</h1>
-    <slot />
-  </article>
+  <div class="py-24 sm:py-32">
+    <div class="mx-auto">
+      <div class="mx-auto max-w-4xl px-6 lg:px-8">
+        <div class="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
+          <article class="prose lg:prose-lg">
+            <h1>{frontmatter.title}</h1>
+            <slot />
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>

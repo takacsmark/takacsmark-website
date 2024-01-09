@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="dark:bg-gray-900">
+    <section>
       <div className="relative isolate overflow-hidden h-full xl:h-[56rem] 2xl:h-[40rem] min-[1822px]:h-[48rem] min-[2048px]:h-[56rem] min-[2248px]:h-[64rem] min-[2448px]:h-full">
         <img
           src="/images/Hero.jpg"
@@ -26,10 +26,10 @@ const Hero = () => {
         </div>
         <div className="mx-auto max-w-2xl z-0 py-60 md:py-[444px] xl:py-60 min-h-screen xl:mx-0 2xl:mx-auto">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight dark:text-white sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
               AI for Good
             </h1>
-            <p className="mt-6 text-lg leading-8 dark:text-gray-300">
+            <p className="mt-6 text-lg leading-8">
               Highlighting the importance of mental health and compassion
               through AI generated illustrations. Building solutions to build a
               better world. Leading transformation programs with empathy.

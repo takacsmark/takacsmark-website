@@ -44,7 +44,9 @@ const Dropdown = ({ config }) => (
               <a
                 href={child.href}
                 className={classNames(
-                  child.current ? "bg-gray-100 text-gray-900" : "text-gray-800",
+                  child.current
+                    ? "bg-gray-100 text-gray-900 "
+                    : "text-gray-800 ",
                   "group flex items-center px-4 py-2 text-md hover:underline cursor-pointer",
                 )}
               >
@@ -138,7 +140,7 @@ const NavBar: React.FC<NavBarProps> = ({
     <nav
       className={`fixed w-full flex items-center justify-between p-6 lg:px-8 ${
         isSticky
-          ? "bg-white dark:bg-black shadow-lg transition-colors duration-150"
+          ? "bg-white shadow-lg transition-colors duration-150"
           : "bg-transparent"
       } z-50`}
       aria-label="Global"
@@ -157,7 +159,7 @@ const NavBar: React.FC<NavBarProps> = ({
         <button
           type="button"
           className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${
-            isSticky ? "text-gray-800 dark:text-white" : "dark:text-gray-200"
+            isSticky ? "text-gray-800" : ""
           } `}
           onClick={() => setMobileMenuOpen(true)}
         >
@@ -171,7 +173,7 @@ const NavBar: React.FC<NavBarProps> = ({
             <a
               key={item.name}
               href={item.href}
-              className="text-lg leading-6 hover:underline underline-offset-4 dark:text-white"
+              className="text-lg leading-6 hover:underline underline-offset-4"
             >
               {item.name}
             </a>
@@ -202,7 +204,7 @@ const SlideInNavigation: React.FC<SlideInNavigationProps> = ({
       onClose={setMobileMenuOpen}
     >
       <div className="fixed inset-0 z-50" />
-      <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
+      <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
         <div className="flex items-center justify-between">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Savalera</span>
@@ -214,7 +216,7 @@ const SlideInNavigation: React.FC<SlideInNavigationProps> = ({
           </a>
           <button
             type="button"
-            className="-m-2.5 p-2.5 text-gray-400 dark:text-white"
+            className="-m-2.5 p-2.5 text-gray-400"
             onClick={() => setMobileMenuOpen(false)}
           >
             <span className="sr-only">Close menu</span>
@@ -229,7 +231,7 @@ const SlideInNavigation: React.FC<SlideInNavigationProps> = ({
                   key={item.name}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="-mx-3 block px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800 dark:hover:bg-gray-950 hover:underline underline-offset-4"
+                  className="-mx-3 block px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800 hover:underline underline-offset-4"
                 >
                   {item.name}
                 </a>

@@ -34,7 +34,7 @@ const posts = [
 
 const BlogFeatured = () => {
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8">
         <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
           <time
