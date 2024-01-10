@@ -192,7 +192,7 @@ $ docker service logs --raw mystifying_lamarr
 
 Docker logs are not only about containers, they're also about the logs of the Docker Engine itself. The location of the Docker Engine logs is different on different platforms.
 
-You can find the up-to-date spec on the [Docker site](https://docs.docker.com/config/daemon/#read-the-logs){:target="\_blank"}.
+You can find the up-to-date spec on the [Docker site](https://docs.docker.com/config/daemon/#read-the-logs).
 
 Let me share the current info here:
 
@@ -201,5 +201,5 @@ Let me share the current info here:
 - Ubuntu 16.04+, CentOS - `$ journalctl -u docker.service`
 - Ubuntu 14.10- - `/var/log/upstart/docker.log`
 - macOS (Docker 18.01+) - `~/Library/Containers/com.docker.docker/Data/vms/0/console-ring`
-- macOS (Docker <18.01) - `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring`
+- macOS (Docker < 18.01) - `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring`
 - Windows - `AppData\Local`

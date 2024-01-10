@@ -24,17 +24,14 @@ This is a tricky point, because the solution itself is short and simple, but in 
 
 For the above reason, I think it's useful to read the whole post, but in case you don't have the time, here you have the one-liner to solve the issue.
 
-{% raw %}
 
 ```shell
 $ docker inspect -f "{{ .NetworkSettings.Networks.<network_name>.IPAddress }}" <container_name||container_id>
 ```
 
-{% endraw %}
 
 With a specific example to check the IP of a container called `boring_noyce` on the default bridge network the command looks like this:
 
-{% raw %}
 
 ```shell
 docker inspect -f "{{ .NetworkSettings.Networks.bridge.IPAddress }}" boring_noyce
@@ -42,7 +39,6 @@ docker inspect -f "{{ .NetworkSettings.Networks.bridge.IPAddress }}" boring_noyc
 172.17.0.4
 ```
 
-{% endraw %}
 
 Let's come back to the main point now; why and when you might want to use the IP address of a Docker container?
 
@@ -60,7 +56,7 @@ The meaning of empheral is something short-lived, the Docker documentation expla
 
 "By “ephemeral”, we mean that the container can be stopped and destroyed, then rebuilt and replaced with an absolute minimum set up and configuration."
 
-You can read about this in the [Docker docs](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/){:target="\_blank"} or in my [in my Dockerfile best practices tutorial](https://takacsmark.com/dockerfile-tutorial-by-example-dockerfile-best-practices-2018/#containers-should-be-ephemeral){:target="\_blank"}.
+You can read about this in the [Docker docs](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) or in my [in my Dockerfile best practices tutorial](https://takacsmark.com/dockerfile-tutorial-by-example-dockerfile-best-practices-2018/#containers-should-be-ephemeral).
 
 **The real meaning of this is that your containers are just temporary workers that can be destroyed and recreated as you need them.**
 
@@ -101,7 +97,7 @@ In order to create a good design for your application, you usually create user d
 
 **So it's important to understand the network context of your application before going after the IP address.**
 
-You use the `docker network` commands or the Compose file to define your networks. Please refer to the [Compose tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/){:target="\_blank"}, the [Swarm tutorial](https://takacsmark.com/docker-swarm-tutorial-for-beginners/){:target="\_blank"} for more details, or [get the book](https://takacsmark.com/get-started-with-docker-in-your-projects-through-examples){:target="\_blank"} for an in-depth learning experience.
+You use the `docker network` commands or the Compose file to define your networks. Please refer to the [Compose tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/), the [Swarm tutorial](https://takacsmark.com/docker-swarm-tutorial-for-beginners/) for more details, or [get the book](https://takacsmark.com/get-started-with-docker-in-your-projects-through-examples) for an in-depth learning experience.
 
 Please note that Swarm mode adds further networks to the list. If you create a service in Swarm mode, requests are routed to the right node and right container by the default overlay network. You can, of course create user defined overlay networks.
 
@@ -191,16 +187,12 @@ As you can see the `bridge` network (I mean the network called `bridge`) has thr
 
 You can get the IP address of a single container inspecting the container itself and using GO templates to filter the results with the `-f` (filter) flag.
 
-{% raw %}
-
 ```shell
 $ docker inspect -f "{{ .NetworkSettings.Networks.bridge.IPAddress }}" boring_noyce
 
 172.17.0.4
 
 ```
-
-{% endraw %}
 This one-liner may look elegant, but I think it's impractical, because it's too long and you need to enter the network name (`bridge`) in the middle manually.
 
 _You may think now that the one-liner is better, because you can use it in scripts. Please remember that you are not supposed to do that. If you need the IP address in production scripting, your should probably improve your network design._
@@ -257,19 +249,13 @@ $ docker network inspect mynet
 
 Now our container called `boring_noyce` is connected to `mynet`, too. Let's inspect the container's network settings.
 
-{% raw %}
-
 ```shell
 $ docker container inspect -f "{{ .NetworkSettings }}" boring_noyce
 
 {{ f7e683369c04398e325c677559c4c9e392c1ea9482387fcec6e2e5d5da108368 false  0 map[80/tcp:[]] /var/run/docker/netns/f7e683369c04 [] []} {0728c437aafa9b5b48eaed9ff8726cc69b2c322181eabd30305696ed30b35647 172.17.0.1  0 172.17.0.4 16  02:42:ac:11:00:04} map[bridge:0xc4205da000 mynet:0xc4205da0c0]}
 ```
 
-{% endraw %}
-
 We can try again to find out the IP address of this container on the various networks.
-
-{% raw %}
 
 ```shell
 $ docker inspect -f "{{ .NetworkSettings.Networks.bridge.IPAddress }}" boring_noyce
@@ -280,14 +266,9 @@ $ docker inspect -f "{{ .NetworkSettings.Networks.mynet.IPAddress }}" boring_noy
 
 172.22.0.2
 ```
-
-{% endraw %}
-
 **The main point I'm trying to make with this post is to learn the art of architecture design and spend time on your networks definition rather than hacking with IPs.** Nevertheless you have the tools here to find out your container IPs.
 
 Having said this, I think we can get a bit more funky with this command. We can, for example, list the IPs of all containers on the bridge network.
-
-{% raw %}
 
 ```shell
 docker inspect -f "{{ .NetworkSettings.Networks.bridge.IPAddress }}" $(docker container ls -qa)
@@ -297,11 +278,7 @@ docker inspect -f "{{ .NetworkSettings.Networks.bridge.IPAddress }}" $(docker co
 172.17.0.2
 ```
 
-{% endraw %}
-
 The same command on the user defined network gives only one IP, because only one of the containers is connected.
-
-{% raw %}
 
 ```shell
 docker inspect -f "{{ .NetworkSettings.Networks.mynet.IPAddress }}" $(docker container ls -qa)
@@ -310,8 +287,6 @@ docker inspect -f "{{ .NetworkSettings.Networks.mynet.IPAddress }}" $(docker con
 <no value>
 <no value>
 ```
-
-{% endraw %}
 
 ## A note on Swarm mode
 

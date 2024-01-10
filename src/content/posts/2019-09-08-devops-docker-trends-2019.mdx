@@ -383,20 +383,20 @@ As you implement your DevOps capabilities you usually start with a few base tool
 
 A better approach is to select the minimum set of components that drive positive change in your company's balance sheet. Based on the tables and our personal experience these are the areas to get started:
 
-- **[Docker](https://docker.com){:target="\_blank"}** is on top of both lists. It's a great automation driver, because you have small footprint operating environment for your applications and this environment is defined as code. _You can destroy and rebuild your entire application and its environment from scratch any time and you get the same results._
-- Another tool that most companies add in the beginning is the **[Jenkins automation server](https://jenkins.io){:target="\_blank"}**. Jenkins drives your entire pipeline, _it triggers a job when developers check-in changes under source control and takes care of building, testing, shipping and even live deployment if you prefer through various environments automatically._
-- **[Ansible](https://www.ansible.com/){:target="\_blank"}, [Chef](https://www.chef.io/){:target="\_blank"} and [Puppet](https://puppet.com/){:target="\_blank"}** are products that help you manage your infrastructure by automating provisioning and configuration management. Ansible has the highest position in the tables out of these three products. This is in-line with what we see with corporate clients. Ansible is part of the RedHat family of products and I believe this is a definite plus in the enterprise world.
-- **[GitHub](https://github.com/){:target="\_blank"} and [GitLab](https://gitlab.com/){:target="\_blank"}** are both based on git, the free and open source version control system originally written by Linus Torvalds. Automation tools like Jenkins are mostly used and therefore best integrated with git. This is why _most clients set up their own GitLab for DevOps initiatives._ GitHub is available as a cloud hosted offering online for organizations whose policies are relaxed enough to go down the public cloud path.
-- The list would not be complete without **[Kubernetes](https://kubernetes.io/){:target="\_blank"}**, the market leading container orchestration platform. _Kubernetes does the heavy lifting running your Docker based applications on computer clusters._
+- **[Docker](https://docker.com)** is on top of both lists. It's a great automation driver, because you have small footprint operating environment for your applications and this environment is defined as code. _You can destroy and rebuild your entire application and its environment from scratch any time and you get the same results._
+- Another tool that most companies add in the beginning is the **[Jenkins automation server](https://jenkins.io)**. Jenkins drives your entire pipeline, _it triggers a job when developers check-in changes under source control and takes care of building, testing, shipping and even live deployment if you prefer through various environments automatically._
+- **[Ansible](https://www.ansible.com/), [Chef](https://www.chef.io/) and [Puppet](https://puppet.com/)** are products that help you manage your infrastructure by automating provisioning and configuration management. Ansible has the highest position in the tables out of these three products. This is in-line with what we see with corporate clients. Ansible is part of the RedHat family of products and I believe this is a definite plus in the enterprise world.
+- **[GitHub](https://github.com/) and [GitLab](https://gitlab.com/)** are both based on git, the free and open source version control system originally written by Linus Torvalds. Automation tools like Jenkins are mostly used and therefore best integrated with git. This is why _most clients set up their own GitLab for DevOps initiatives._ GitHub is available as a cloud hosted offering online for organizations whose policies are relaxed enough to go down the public cloud path.
+- The list would not be complete without **[Kubernetes](https://kubernetes.io/)**, the market leading container orchestration platform. _Kubernetes does the heavy lifting running your Docker based applications on computer clusters._
 
 _You may achieve tangible benefits just by implementing GitLab, Jenkins and Docker with strong automated tests for some of your applications to get started._
 
 Let's have a few words about some other components on the list:
 
-- **[Terraform](https://www.terraform.io/){:target="\_blank"} and [Vagrant](https://www.vagrantup.com/){:target="\_blank"}** are both products from HashiCorp. Terraform is a tool for building infrastructure. The key difference between Terraform and Ansible, Chef and Puppet from before, is that you use Terraform to create your infrastructure and you use Ansible, Chef and Puppet to manage the configuration of the infrastructure you built with Terraform. Terraform can build and manage large scale infrastructures across multiple cloud providers. Vagrant is a similar tool, but it's used to manage development environments locally.
-- **[Sonarqube](https://www.sonarqube.org/){:target="\_blank"}** is your tool for code inspection. _It helps you write high quality code and reduce technical debt by checking your code for bugs, security vulnerabilities, maintainability issues._ It integrates well with other tools like Jenkins and Git.
+- **[Terraform](https://www.terraform.io/) and [Vagrant](https://www.vagrantup.com/)** are both products from HashiCorp. Terraform is a tool for building infrastructure. The key difference between Terraform and Ansible, Chef and Puppet from before, is that you use Terraform to create your infrastructure and you use Ansible, Chef and Puppet to manage the configuration of the infrastructure you built with Terraform. Terraform can build and manage large scale infrastructures across multiple cloud providers. Vagrant is a similar tool, but it's used to manage development environments locally.
+- **[Sonarqube](https://www.sonarqube.org/)** is your tool for code inspection. _It helps you write high quality code and reduce technical debt by checking your code for bugs, security vulnerabilities, maintainability issues._ It integrates well with other tools like Jenkins and Git.
 
-If you look back at the tables, you find that **[Java](https://www.java.com/en/download/){:target="\_blank"}** is the only programming language that appears on both lists. You see Python and Node.js gain immense popularity lately and their communities are rapidly growing. I am also a great fan of both languages. **If you look at corporate reality, you find that Java still dominates application development and therefore it's a key skill in your DevOps journey.**
+If you look back at the tables, you find that **[Java](https://www.java.com/en/download/)** is the only programming language that appears on both lists. You see Python and Node.js gain immense popularity lately and their communities are rapidly growing. I am also a great fan of both languages. **If you look at corporate reality, you find that Java still dominates application development and therefore it's a key skill in your DevOps journey.**
 
 Let's have a look what additional info the Docker tables add to the picture!
 
@@ -750,7 +750,7 @@ A key component of your Docker based delivery pipeline is a **Docker registry**.
 
 The Docker Registry in the list is Docker's free solution that lets you set up your own Docker registry. The registry that you get is like having your own [Docker Hub](https://hub.docker.com).
 
-Enterprises usually go for a different product. A popular solution is the [Nexus repository manager](https://www.sonatype.com/nexus-repository-sonatype){:target="\_blank"} by Sonatype.
+Enterprises usually go for a different product. A popular solution is the [Nexus repository manager](https://www.sonatype.com/nexus-repository-sonatype) by Sonatype.
 
 ## Growth trends of the key DevOps and Docker related technologies
 
@@ -758,13 +758,13 @@ Let's look at two figures showing the growth trends of the key tags in DevOps an
 
 Let's start with broader DevOps related tags as the percentage of all tags on Stackoverflow.
 
-![img]({{ site.url }}/assets/images/in-content/docker-so-questions-per-total-2018.png)
+![img](../../assets/docker-so-questions-per-total-2018.png)
 
 \*You can see the highest growth with AWS, Docker and Kubernetes. Jenkins, GitLab, Ansible and Terraform are also growing steadily, while the other tags seem fairly stable.
 
 Let's have a look at Docker's core components now.
 
-![img]({{ site.url }}/assets/images/in-content/docker-base-so-questions-trends-2018.png)
+![img](../../assets/docker-base-so-questions-trends-2018.png)
 
 **Kubernetes, Compose and Dockerfile are clearly the top tags. This is where you should invest into skills and capabilities, these are the key components to build success with Docker.**
 
@@ -1001,9 +1001,9 @@ Top growth established tags in the Docker domain.
 
 > Actions you may take:
 >
-> - Start learning [Docker](https://docker.com){:target="\_blank"} with special focus on custom Docker images and Compose.
-> - Start learning container orchestration building Swarm skills and learning [Kubernetes](https://kubernetes.io){:target="\_blank"} in detail.
-> - Set up your [Jenkins](https://jenkins.io/){:target="\_blank"} development pipeline; start measuring and improving the performance of your production line.
+> - Start learning [Docker](https://docker.com) with special focus on custom Docker images and Compose.
+> - Start learning container orchestration building Swarm skills and learning [Kubernetes](https://kubernetes.io) in detail.
+> - Set up your [Jenkins](https://jenkins.io/) development pipeline; start measuring and improving the performance of your production line.
 > - Start experimenting with small applications first, containerize a web server, a Java or PHP application. Create a proof of concept of a Python automation tool or a Node.js application.
 
 ### Growth of emerging technologies
@@ -1191,7 +1191,7 @@ Top growth established tags in the Docker domain.
 **These are capabilities you should be actively developing**.
 
 - I mentioned before that the benefits of Docker are brought by the level of automation you can build in your development workflow. You find **GitLab** in more and more enterprise projects as the source control and CI/CD tool of choice.
-- **[Sonarqube](https://www.sonarqube.org/){:target="\_blank"}** code inspection is becoming a vital part of automation architectures.
+- **[Sonarqube](https://www.sonarqube.org/)** code inspection is becoming a vital part of automation architectures.
 - The growth of **Terraform**, **Puppet**, **Chef** and **Ansible** signals that we live in the era of end to end automation where infrastructure is no different from traditional code.
 - **Spring-boot** gets you up and running with your Spring based Java application. Spring and Spring boot are the tools that we meet in almost every enterprise environment.
 - **Bash** is a skill you probably haven't used in a while. As development and opserations both contribute to artifacts like the Dockerfile, your Bash skills are needed again.
@@ -1201,14 +1201,14 @@ Top growth established tags in the Docker domain.
 
 > Actions you may take:
 >
-> - Set up a [GitLab](https://about.gitlab.com/){:target="\_blank"} environment, add it to your DevOps stack as a source control and CI/CD facility.
-> - Try [Sonarqube](https://www.sonarqube.org/){:target="\_blank"} in a small project that you are starting now.
+> - Set up a [GitLab](https://about.gitlab.com/) environment, add it to your DevOps stack as a source control and CI/CD facility.
+> - Try [Sonarqube](https://www.sonarqube.org/) in a small project that you are starting now.
 > - Think of new ways to maximize the value of your configuration management with tool like Ansible.
-> - Create a [Spring boot](https://spring.io/projects/spring-boot){:target="\_blank"} application with Docker. A Restful API backend would be a great candidate for your first pilot.
+> - Create a [Spring boot](https://spring.io/projects/spring-boot) application with Docker. A Restful API backend would be a great candidate for your first pilot.
 > - Add a **Bash** training to your developer curriculum.
 > - Experiment with Windows based containers, especially if you have .Net applications.
-> - Consider [Django](https://www.djangoproject.com/){:target="\_blank"} or [Ruby on Rails](https://rubyonrails.org/){:target="\_blank"} for your next internal web application.
-> - Identify components in your development and testing workflow that you may host in public cloud and give it a go with [AWS](https://aws.amazon.com/){:target="\_blank"}.
+> - Consider [Django](https://www.djangoproject.com/) or [Ruby on Rails](https://rubyonrails.org/) for your next internal web application.
+> - Identify components in your development and testing workflow that you may host in public cloud and give it a go with [AWS](https://aws.amazon.com/).
 
 ### Growth of trending technologies
 
@@ -1394,16 +1394,16 @@ Top growth established tags in the Docker domain.
 </table>
 **These are the technologies to watch, and these are the domains you should consider for future skill building.**
 
-- Microservices architectures are widely used in scaled web applications and now they are built in various enterprise scenarios, too. I'm also working on such and implementation. Tools that help you build great interoperability and maintainability of your services are amongst the top growing trending tags like [Istio](https://istio.io/docs/concepts/what-is-istio/){:target="\_blank"}, [Envoy Proxy](https://www.envoyproxy.io/){:target="\_blank"}, [Traefik](https://traefik.io/){:target="\_blank"}, [Hashicorp Vault](https://www.vaultproject.io/){:target="\_blank"}, [Graphite](https://graphiteapp.org/){:target="\_blank"} and [the circuit breaker pattern](https://martinfowler.com/bliki/CircuitBreaker.html){:target="\_blank"}.
-- [Traefik](https://traefik.io/){:target="\_blank"}, the cloud-native reverse-proxy and load-balancer with 650M+ downloads is a great emerging solution for today's cloud challenges.
+- Microservices architectures are widely used in scaled web applications and now they are built in various enterprise scenarios, too. I'm also working on such and implementation. Tools that help you build great interoperability and maintainability of your services are amongst the top growing trending tags like [Istio](https://istio.io/docs/concepts/what-is-istio/), [Envoy Proxy](https://www.envoyproxy.io/), [Traefik](https://traefik.io/), [Hashicorp Vault](https://www.vaultproject.io/), [Graphite](https://graphiteapp.org/) and [the circuit breaker pattern](https://martinfowler.com/bliki/CircuitBreaker.html).
+- [Traefik](https://traefik.io/), the cloud-native reverse-proxy and load-balancer with 650M+ downloads is a great emerging solution for today's cloud challenges.
 - **Minikube** is the one-node Kubernetes cluster that you can install on your machine and start learning right away.
 - **Angular** is the reactive front-end UI framework used by most enterprises. You find a lot of debate online whether Angular, React or Vue is the best Node.js UI framework today. Enterprise reality is a little different than independent projects; enterprises go for Angular almost exclusively, because it's a framework with built-in standards out of the box that greatly improve build times and quality with large teams and many applications.
 
 > Actions you may take:
 >
 > - Dive into microservices, find a small, client facing app, set up the architecture and learn and experiment.
-> - Try [Traefik](https://traefik.io/){:target="\_blank"} as a reverse-proxy and load-balancer and compare your development and operations metrics to your current solution.
-> - Encourage your development and operations team members to launch [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/){:target="\_blank"} on their computers and practice Kubernetes techniques.
+> - Try [Traefik](https://traefik.io/) as a reverse-proxy and load-balancer and compare your development and operations metrics to your current solution.
+> - Encourage your development and operations team members to launch [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on their computers and practice Kubernetes techniques.
 > - Set up a Spring example with Angular and see how you could use this combo to build and deploy new business capabilities faster than your current software frameworks.
 
 ## Wrap-up

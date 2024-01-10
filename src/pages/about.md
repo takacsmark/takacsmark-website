@@ -1,6 +1,7 @@
 ---
-title: About
-permalink: /about/
+layout: ../layouts/BlogPostLayout.astro
+slug: about
+title: "About"
 ---
 
 ## The blog

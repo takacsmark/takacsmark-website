@@ -180,7 +180,7 @@ services:
     image: redis:4.0.11-alpine
 ```
 
-This file is in the `YAML` format, which is a "human friendly data serialization standard for all programming languages", as seen on [yaml.org.](http://yaml.org/){:target="\_blank"}
+This file is in the `YAML` format, which is a "human friendly data serialization standard for all programming languages", as seen on [yaml.org.](http://yaml.org/)
 
 On the first line we specify the version of the Compose file format as `version: '3'`. Docker Compose file format has various versions as new features are added to the Compose file. Versioning is essential to make sure that changes won't break your applications.
 
@@ -227,7 +227,7 @@ We tell Docker Compose to use the official Redis image for this service. Docker 
 
 ### Run the example
 
-To run the example you need to have `docker-compose` installed on your system. The Docker for Mac and Windows apps come with `docker-compose` included, but on Linux systems you need to install it yourself. If you are on Linux, please follow [this guide](https://docs.docker.com/compose/install/#install-compose){:target="\_blank"} to install Compose.
+To run the example you need to have `docker-compose` installed on your system. The Docker for Mac and Windows apps come with `docker-compose` included, but on Linux systems you need to install it yourself. If you are on Linux, please follow [this guide](https://docs.docker.com/compose/install/#install-compose) to install Compose.
 
 Let's run the example with a single command:
 
@@ -237,7 +237,7 @@ $ docker-compose up
 
 This command will build the custom image for the `app` service and pull the Redis image from the Docker Hub and start them as we described the stack in our Compose file.
 
-To test the app, you can post a student with curl like this (or alternatively you can use a tool like [Postman](https://www.getpostman.com/){:target="\_blank"}):
+To test the app, you can post a student with curl like this (or alternatively you can use a tool like [Postman](https://www.getpostman.com/)):
 
 ```shell
 $ curl --header "Content-Type: application/json" \
@@ -364,7 +364,7 @@ Compose provides a huge number of options, let me point out a crucial resource t
 
 ### The Compose file reference
 
-The best resource for writing Compose files is the [official Compose file reference](https://docs.docker.com/compose/compose-file/){:target="\_blank"}. I usually have this page open all the time, this single page contains all options and possibilities that you can use in the Compose file.
+The best resource for writing Compose files is the [official Compose file reference](https://docs.docker.com/compose/compose-file/). I usually have this page open all the time, this single page contains all options and possibilities that you can use in the Compose file.
 
 It's best to use it as a mere reference to find out how to specify various aspects of your stack in the Compose file. The reference will not give you a broad overview of the concepts around Docker Compose, but don't worry we'll do this in this article.
 
