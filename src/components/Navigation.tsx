@@ -11,13 +11,13 @@ import {
   ShieldCheckIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, createElement, useEffect, useState } from "react";
+import { Fragment, createElement, useEffect, useState, type FC } from "react";
 
 const classNames = (...classes: string[]): string => {
   return classes.filter(Boolean).join(" ");
 };
 
-const Dropdown = ({ config }) => (
+const Dropdown: FC<any> = ({ config }) => (
   <Menu as="div" className="relative inline-block text-left">
     <div>
       <Menu.Button className="-mt-[2px] inline-flex gap-x-1.5 text-lg hover:underline">
@@ -40,7 +40,7 @@ const Dropdown = ({ config }) => (
     >
       <Menu.Items className="absolute right-0 z-10 mt-2 w-64 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className="py-1">
-          {config.children.map((child) => (
+          {config.children.map((child: any) => (
             <Menu.Item>
               <a
                 href={child.href}
