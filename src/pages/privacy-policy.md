@@ -1,7 +1,8 @@
 ---
-layout: ../layouts/BlogPostLayout.astro
+layout: ../layouts/PageLayout.astro
 slug: privacy-policy
 title: "Privacy policy"
+description: "takacsmark.com - Privacy policy"
 ---
 
 Privacy policy of takacsmark.com.

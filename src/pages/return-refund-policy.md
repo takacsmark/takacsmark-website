@@ -1,7 +1,8 @@
 ---
-layout: ../layouts/BlogPostLayout.astro
+layout: ../layouts/PageLayout.astro
 slug: return-refund-policy
 title: "Return and refund policy"
+description: "takacsmark.com - Return and refund policy"
 ---
 
 Thanks for shopping at takacsmark.com.

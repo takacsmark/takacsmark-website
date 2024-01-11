@@ -1,7 +1,8 @@
 ---
-layout: ../layouts/BlogPostLayout.astro
+layout: ../layouts/PageLayout.astro
 slug: get-started-with-docker-in-your-projects-through-examples
 title: "Get started with Docker in your projects - through examples"
+description: "takacsmark.com - Docker book download page"
 ---
 
 <div

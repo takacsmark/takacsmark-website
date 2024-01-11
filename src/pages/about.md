@@ -1,7 +1,8 @@
 ---
-layout: ../layouts/BlogPostLayout.astro
+layout: ../layouts/PageLayout.astro
 slug: about
 title: "About"
+description: "takacsmark.com - About"
 ---
 
 ## The blog

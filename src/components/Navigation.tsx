@@ -1,4 +1,5 @@
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import {
   AdjustmentsVerticalIcon,
   ArrowUturnLeftIcon,
@@ -12,9 +13,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { Fragment, createElement, useEffect, useState } from "react";
 
-function classNames(...classes) {
+const classNames = (...classes: string[]): string => {
   return classes.filter(Boolean).join(" ");
-}
+};
 
 const Dropdown = ({ config }) => (
   <Menu as="div" className="relative inline-block text-left">
@@ -66,9 +67,10 @@ const Dropdown = ({ config }) => (
 );
 
 const navigation = [
-  { name: "Portfolio", href: "/portfolio", current: false },
+  { name: "Home", href: "/", current: false },
+  //{ name: "Portfolio", href: "/portfolio", current: false },
   { name: "Blog", href: "/blog", current: false },
-  { name: "Shop", href: "/shop", current: false },
+  //{ name: "Shop", href: "/shop", current: false },
   {
     name: "More",
     current: false,
@@ -226,16 +228,50 @@ const SlideInNavigation: React.FC<SlideInNavigationProps> = ({
         <div className="mt-6 flow-root">
           <div className="-my-6 divide-y divide-gray-500/25">
             <div className="space-y-2 py-6">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="-mx-3 block px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800 hover:underline underline-offset-4"
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navigation.map((item) =>
+                !item.children ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="-mx-2 block pl-12 pr-2 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800 hover:underline underline-offset-4"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Disclosure as="div">
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button className="flex items-center w-full text-left rounded-md p-2 gap-x-3 text-base leading-7 font-semibold text-white">
+                          <ChevronRightIcon
+                            className={classNames(
+                              open
+                                ? "rotate-90 text-gray-500"
+                                : "text-gray-400",
+                              "h-5 w-5 shrink-0",
+                            )}
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </Disclosure.Button>
+                        <Disclosure.Panel as="ul" className="mt-1 px-2">
+                          {item.children.map((subItem) => (
+                            <li key={subItem.name}>
+                              <Disclosure.Button
+                                as="a"
+                                href={subItem.href}
+                                className="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 text-white"
+                              >
+                                {subItem.name}
+                              </Disclosure.Button>
+                            </li>
+                          ))}
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                ),
+              )}
             </div>
           </div>
         </div>

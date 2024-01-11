@@ -1,7 +1,8 @@
 ---
-layout: ../layouts/BlogPostLayout.astro
+layout: ../layouts/PageLayout.astro
 slug: cookie-settings
 title: "Cookie settings"
+description: "takacsmark.com - Cookie settings"
 ---
 
 <form class="space-y-8 divide-y divide-gray-200">

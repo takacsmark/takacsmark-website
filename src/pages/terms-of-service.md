@@ -1,7 +1,8 @@
 ---
-layout: ../layouts/BlogPostLayout.astro
+layout: ../layouts/PageLayout.astro
 slug: terms-of-service
 title: "Terms of service"
+description: "takacsmark.com - Terms of service"
 ---
 
 #### OVERVIEW

@@ -9,9 +9,9 @@ import DefaultImage from "../../public/images/Hero.jpg";
 const images = import.meta.glob("../assets/*");
 
 interface Props {
-  author: string;
+  author?: string;
   description: string;
-  image: string;
+  image?: string;
   title: string;
   type: string;
 }
