@@ -8,11 +8,18 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://takacsmark.com",
   integrations: [tailwind(), react(), mdx()],
   markdown: {
+    syntaxHighlight: "prism",
     remarkPlugins: [remarkToc],
-    rehypePlugins: [[rehypeExternalLinks, {
-      target: "_blank"
-    }]]
-  }
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+        },
+      ],
+    ],
+  },
 });

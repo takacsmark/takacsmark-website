@@ -4,7 +4,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout
+  author={frontmatter.author}
+  description={frontmatter.description}
+  image={frontmatter.image.url}
+  title={frontmatter.title}
+  type="Article"
+>
   <div class="py-24 sm:py-32">
     <div class="mx-auto">
       <div class="mx-auto max-w-4xl px-6 lg:px-8">

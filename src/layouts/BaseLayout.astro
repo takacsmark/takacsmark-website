@@ -1,31 +1,76 @@
 ---
+import { getImage } from "astro:assets";
 import "@fontsource/raleway";
 import "@fontsource/playfair";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer.astro";
+import DefaultImage from "../../public/images/Hero.jpg";
+
+const images = import.meta.glob("../assets/*");
 
 interface Props {
+  author: string;
+  description: string;
+  image: string;
   title: string;
+  type: string;
 }
 
-const { title } = Astro.props;
+const defaults = {
+  author: "Márk Takács",
+  description: "Social impact through Ai art and data",
+  image: await getImage({ src: DefaultImage, format: "webp" }),
+  title: "takacsmark.com",
+  type: "Website",
+};
+
+const { author, description, title, image, type } = Astro.props;
+
+let optimizedThumbnail;
+
+if (image !== undefined) {
+  optimizedThumbnail = await getImage({
+    src: images[image.slice(3)](),
+    format: "webp",
+  });
+}
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-  <heak>
+  <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
+    <title>{title || defaults.title}</title>
 
-    <meta name="descrption" content="TODO" />
-    <meta name="author" content="TODO" />
-    <link rel="canonical" href="TODO" />
-  </heak>
+    <meta name="descrption" content={description || defaults.description} />
+    <meta name="author" content={author || defaults.author} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <meta property="og:title" content={title || defaults.title} />
+    <meta
+      property="og:description"
+      content={description || defaults.description}
+    />
+    <meta
+      property="og:image"
+      content={(image &&
+        optimizedThumbnail &&
+        Astro.url.host + optimizedThumbnail.src) ||
+        Astro.url.host + defaults.image.src}
+    />
+    <meta property="og:type" content={type || defaults.type} />
+
+    <!-- Google Site Verfication -->
+    <meta
+      name="google-site-verification"
+      content="2DFgqqJVnbuSGjOdyKJZFbGKPGHqu99tt4aBBmbuiKc"
+    />
+  </head>
   <body>
     <div>
       <Navigation topNavigationScrollPX={42} client:load />
@@ -33,5 +78,4 @@ const { title } = Astro.props;
       <Footer />
     </div>
   </body>
-
 </html>
