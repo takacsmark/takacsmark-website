@@ -1,7 +1,9 @@
 @import "tailwindcss";
-
 @import "@fontsource/work-sans";
 @import "@fontsource/ibm-plex-sans";
+
+
+@plugin "@tailwindcss/forms";
 
 @theme {
   --font-sans: 'Work Sans', sans-serif;
