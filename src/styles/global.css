@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@import "@fontsource/work-sans";
+@import "@fontsource/ibm-plex-sans";
+
+@theme {
+  --font-sans: 'Work Sans', sans-serif;
+  --font-ibm: 'IBM Plex Sans', sans-serif;
+}
