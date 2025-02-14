@@ -2,10 +2,10 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 export default function Example() {
   return (
-    <div className="relative isolate overflow-hidden bg-black">
+    <div className="relative isolate overflow-hidden bg-white dark:bg-black">
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-10">
         <div className="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
-          <h1 className="mt-10 text-pretty text-5xl font-semibold tracking-tight text-white sm:text-7xl font-ibm">
+         <h1 className="mt-10 text-pretty text-5xl font-semibold tracking-tight text-black dark:text-white sm:text-7xl font-ibm">
             Announcing the Soft Launch of Savalera Multi-Agent Labs
           </h1>
           <p className="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">
@@ -15,11 +15,11 @@ export default function Example() {
           <div className="mt-10 flex items-center gap-x-6">
             <a
               href="#"
-              className="rounded-md bg-cyan-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+              className=" bg-black dark:bg-white px-3.5 py-2.5 text-sm font-semibold text-white dark:text-black shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
               Get started
             </a>
-            <a href="#" className="text-sm/6 font-semibold text-white">
+            <a href="#" className="text-sm/6 font-semibold text-black dark:text-white">
               Learn more <span aria-hidden="true">→</span>
             </a>
           </div>

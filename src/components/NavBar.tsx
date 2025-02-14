@@ -7,11 +7,11 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-black">
+    <Disclosure as="nav" className="bg-white dark:bg-black">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <div className="shrink-0">
+            <div className="shrink-0 text-black dark:text-white">
               <div>takacsmark.com</div>
             </div>
             <div className="hidden sm:ml-6 sm:block"></div>
@@ -21,25 +21,25 @@ export default function Example() {
               {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
               <a
                 href="#"
-                className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                className="px-3 py-2 text-sm font-medium text-black dark:text-white hover:underline"
               >
                 About Márk Takács
               </a>
               <a
                 href="#"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                className="px-3 py-2 text-sm font-medium text-black dark:text-white hover:underline"
               >
                 Links
               </a>
               <a
                 href="#"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                className="px-3 py-2 text-sm font-medium text-black dark:text-white hover:underline"
               >
                 Savalera
               </a>
               <a
                 href="#"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                className="px-3 py-2 text-sm font-medium text-black dark:text-white hover:underline"
               >
                 Calendar
               </a>

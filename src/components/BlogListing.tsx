@@ -23,7 +23,7 @@ const posts = [
   
   export default function Example() {
     return (
-      <div className="bg-black py-24 sm:py-32 lg:py-8">
+      <div className="bg-white dark:bg-black py-24 sm:py-32 lg:py-8">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:max-w-4xl">
             <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
@@ -35,17 +35,17 @@ const posts = [
                       src={post.imageUrl}
                       className="absolute inset-0 bg-black object-fill"
                     />
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/10" />
                   </div>
                   <div>
                     <div className="group relative max-w-xl">
-                      <h3 className="text-xl/6 font-ibm font-semibold text-white group-hover:text-gray-600">
+                      <h3 className="text-xl/6 font-ibm font-semibold text-black dark:text-white group-hover:text-gray-600">
                         <a href={post.href}>
                           <span className="absolute inset-0" />
                           {post.title}
                         </a>
                       </h3>
-                      <p className="mt-5 text-sm/6 text-white">{post.description}</p>
+                      <p className="mt-5 text-sm/6 text-black dark:text-gray-200">{post.description}</p>
                       <div className="mt-5">
                       <time dateTime={post.datetime} className="text-sm/6 text-gray-400">
                         {post.date}

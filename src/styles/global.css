@@ -9,3 +9,10 @@
   --font-sans: 'Work Sans', sans-serif;
   --font-ibm: 'IBM Plex Sans', sans-serif;
 }
+
+#cc-main {
+  --cc-bg: #ffffff;
+
+  --cc-btn-border-radius: 0;
+
+}
