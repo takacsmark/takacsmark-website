@@ -138,7 +138,8 @@ export default function Example() {
             ))}
           </div>
           <p className="mt-8 text-sm/6 text-gray-700 dark:text-gray-200 md:order-1 md:mt-0">
-            &copy; 2025 Savalera Kft. All rights reserved.
+            &copy; 2013 - {new Date().getFullYear()} Savalera Kft. All rights
+            reserved.
           </p>
         </div>
       </div>

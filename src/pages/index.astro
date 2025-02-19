@@ -1,22 +1,10 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import "../styles/global.css";
-import NavBar from '../components/NavBar';
-import Hero from '../components/Hero';
-import BlogListing from '../components/BlogListing';
-import Footer from '../components/Footer';
+import Site from "../layouts/Site.astro";
+import Hero from "../components/Hero.astro";
+import BlogListing from "../components/BlogListing.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<NavBar />
-		<Hero />
-		<BlogListing />
-		<Footer />
-	</body>
-</html>
+<Site>
+  <Hero />
+  <BlogListing startAt="0" />
+</Site>

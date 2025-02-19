@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const featuredPost = allPosts[0];
+const posts = allPosts.slice(1, 3);
+---
+
+<section>
+  <div class="bg-white py-24 sm:py-32 lg:pt-48">
+    <div
+      class="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8"
+    >
+      <article class="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
+        <time datetime="2020-03-16" class="block text-sm/6 text-gray-600">
+          <FormattedDate date={featuredPost.data.pubDate} />
+        </time>
+        <h2
+          id="featured-post"
+          class="mt-4 text-pretty text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
+        >
+          {featuredPost.data.title}
+        </h2>
+        <p class="mt-4 text-lg/8 text-gray-600">
+          {featuredPost.data.description}
+        </p>
+        <div
+          class="mt-4 flex flex-col justify-between gap-6 sm:mt-8 sm:flex-row-reverse sm:gap-8 lg:mt-4 lg:flex-col"
+        >
+          <div class="flex">
+            <a
+              href={`/blog/${featuredPost.id}/`}
+              class="text-sm/6 font-semibold text-blue-400"
+              aria-describedby="featured-post"
+              >Continue reading <span aria-hidden="true">&rarr;</span></a
+            >
+          </div>
+          <div class="flex lg:border-t lg:border-gray-900/10 lg:pt-8"></div>
+        </div>
+      </article>
+      <div
+        class="mx-auto w-full max-w-2xl border-t border-gray-900/10 pt-12 sm:pt-16 lg:mx-0 lg:max-w-none lg:border-t-0 lg:pt-0"
+      >
+        <div class="-my-12 divide-y divide-gray-900/10">
+          {
+            posts.map((post) => (
+              <article class="py-12">
+                <div class="group relative max-w-xl">
+                  <time
+                    datetime="2020-03-16"
+                    class="block text-sm/6 text-gray-600"
+                  >
+                    <FormattedDate date={post.data.pubDate} />
+                  </time>
+                  <h2 class="mt-2 text-lg font-semibold text-gray-900 group-hover:text-gray-600">
+                    <a href={`/blog/${post.id}/`}>
+                      <span class="absolute inset-0" />
+                      {post.data.title}
+                    </a>
+                  </h2>
+                  <p class="mt-4 text-sm/6 text-gray-600">
+                    {post.data.description}
+                  </p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
