@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import siteLogo from "../assets/savalera-logo-color.svg";
+import siteLogo from "../assets/takacsmark-logo-color.svg";
 
 const navigation = [
   { name: "Blog", href: "/blog" },
