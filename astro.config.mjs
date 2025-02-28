@@ -11,7 +11,7 @@ import jopSoftwarecookieconsent from "@jop-software/astro-cookieconsent";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://takacsmark.com",
   integrations: [
     mdx(),
     sitemap(),
@@ -30,11 +30,11 @@ export default defineConfig({
         translations: {
           en: {
             consentModal: {
-              title: "We use cookies",
-              description: "Cookie modal description",
-              acceptAllBtn: "Accept all",
-              acceptNecessaryBtn: "Reject all",
-              showPreferencesBtn: "Manage Individual preferences",
+              title: "We use cookies (just for analytics, nothing creepy)",
+              description:
+                "We only use cookies for <b>Google Analytics</b> to understand how people use the site—no tracking, no ads. Click Accept to help us improve.",
+              acceptAllBtn: "Accept",
+              acceptNecessaryBtn: "Reject",
             },
             preferencesModal: {
               title: "Manage cookie preferences",
@@ -46,14 +46,6 @@ export default defineConfig({
                 {
                   title: "Somebody said ... cookies?",
                   description: "I want one!",
-                },
-                {
-                  title: "Strictly Necessary cookies",
-                  description:
-                    "These cookies are essential for the proper functioning of the website and cannot be disabled.",
-
-                  //this field will generate a toggle linked to the 'necessary' category
-                  linkedCategory: "necessary",
                 },
                 {
                   title: "Performance and Analytics",
