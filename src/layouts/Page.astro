@@ -1,0 +1,23 @@
+---
+import Site from "./Site.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Site>
+  <article>
+    <div class="bg-white px-6 py-32 lg:px-8">
+      <div class="mx-auto max-w-3xl text-base/7 text-gray-700 prose">
+        <h1
+          class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
+        >
+          {frontmatter.title}
+        </h1>
+        <p class="mt-6 text-xl/8">
+          {frontmatter.description}
+        </p>
+        <slot />
+      </div>
+    </div>
+  </article>
+</Site>

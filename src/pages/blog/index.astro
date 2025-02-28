@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+import Site from "../../layouts/Site.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import BlogListing from "../../components/BlogListing.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Site>
+  <BlogListing startAt="0" />
+</Site>

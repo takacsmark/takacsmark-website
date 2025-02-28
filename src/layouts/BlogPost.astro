@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Site from "./Site.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+---
+
+<Site>
+  <article>
+    <div class="bg-white px-6 py-32 lg:px-8">
+      <div class="mx-auto max-w-3xl text-base/7 text-gray-700 prose">
+        <div class="date">
+          <FormattedDate date={pubDate} />
+          {
+            updatedDate && (
+              <div class="last-updated-on">
+                Last updated on <FormattedDate date={updatedDate} />
+              </div>
+            )
+          }
+        </div>
+        <h1
+          class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
+        >
+          {title}
+        </h1>
+        <p class="mt-6 text-xl/8">
+          {description}
+        </p>
+        <slot />
+      </div>
+    </div>
+  </article>
+</Site>

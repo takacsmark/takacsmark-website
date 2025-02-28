@@ -1,0 +1,13 @@
+---
+import Bare from "./Bare.astro";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+---
+
+<Bare>
+  <NavBar client:load />
+  <main>
+    <slot />
+  </main>
+  <Footer client:load />
+</Bare>

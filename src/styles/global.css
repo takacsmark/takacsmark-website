@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "@fontsource/work-sans";
+@import "@fontsource/ibm-plex-sans";
+
+@plugin "@tailwindcss/forms";
+
+@theme {
+  --font-sans: "Work Sans", sans-serif;
+  --font-ibm: "IBM Plex Sans", sans-serif;
+
+  --color-savalera-pez-blue: #d1ecfa;
+  --color-savalera-pez-pink: #fad1df;
+  --color-savalera-pez-purple: #e6d1fa;
+  --color-savalera-pez-yellow: #faf7d1;
+  --color-savalera-bright-blue: #9cdbfa;
+  --color-savalera-bright-pink: #fa9cbb;
+  --color-savalera-bright-purple: #cb9cfa;
+  --color-savalera-bright-yellow: #faea9c;
+}
+
+.prose a {
+  @apply text-blue-400 hover:text-blue-500;
+}
+
+#cc-main {
+  --cc-bg: #ffffff;
+
+  --cc-btn-border-radius: 0;
+}
