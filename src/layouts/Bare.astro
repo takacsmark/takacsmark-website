@@ -1,0 +1,15 @@
+---
+import Meta from "../components/Meta.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <Meta title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

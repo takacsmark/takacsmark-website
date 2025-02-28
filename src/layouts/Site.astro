@@ -1,21 +1,13 @@
 ---
-import Meta from "../components/Meta.astro";
+import Bare from "./Bare.astro";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
-<!doctype html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <Meta title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <NavBar client:load />
-    <main>
-      <slot />
-    </main>
-    <Footer client:load />
-  </body>
-</html>
+<Bare>
+  <NavBar client:load />
+  <main>
+    <slot />
+  </main>
+  <Footer client:load />
+</Bare>
