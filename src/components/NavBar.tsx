@@ -6,8 +6,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import siteLogo from "../assets/takacsmark-logo-color.svg";
 
 const navigation = [
-  { name: "Blog", href: "/blog" },
+  { name: "Home", href: "/" },
   { name: "Links", href: "https://linktr.ee/takacsmark" },
+  { name: "Savalera", href: "https://savalera.com" },
   { name: "About Mark", href: "/about" },
 ];
 
