@@ -1,5 +1,5 @@
 User-agent: *
-Disallow:
+Allow: /
 
 Sitemap: https://takacsmark.com/sitemap.xml
 
