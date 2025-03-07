@@ -29,6 +29,24 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       gtag("config", "G-VG5XRY1VK5");
     </script>
 
+    <script
+      type="text/plain"
+      data-category="analytics"
+      data-service="Google Analytics"
+    >
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      // Update consent settings to allow analytics tracking
+      gtag("consent", "update", {
+        analytics_storage: "granted",
+      });
+
+      // Re-enable GA tracking
+      gtag("config", "G-VG5XRY1VK5");
+    </script>
+
     <Meta title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
