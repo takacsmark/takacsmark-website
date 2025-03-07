@@ -11,8 +11,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     <script
       is:inline
       async
-      type="text/plain"
-      data-category="analytics"
       src="https://www.googletagmanager.com/gtag/js?id=G-VG5XRY1VK5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,6 +18,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+      });
 
       gtag("config", "G-VG5XRY1VK5");
     </script>
