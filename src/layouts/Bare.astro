@@ -12,7 +12,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       is:inline
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-VG5XRY1VK5"></script>
-    <script>
+
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -30,6 +31,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     </script>
 
     <script
+      is:inline
       type="text/plain"
       data-category="analytics"
       data-service="Google Analytics"
