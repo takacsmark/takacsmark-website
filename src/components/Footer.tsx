@@ -1,5 +1,3 @@
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-
 const navigation = {
   social: [
     {
@@ -44,32 +42,6 @@ export default function Example() {
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32 lg:pt-8">
-        <div className="mt-16 border-t border-black/10 dark:border-white/10 pt-8 sm:mt-20 lg:mt-0 lg:flex lg:items-center lg:justify-between">
-          <div>
-            <h3 className="text-sm/6 font-semibold text-black dark:text-white">
-              The AI Notebook by Mark Takacs on Substack
-            </h3>
-            <p className="mt-2 text-sm/6 text-gray-700 dark:text-gray-200">
-              Follow my AI work, agent simulations, and NFT art projects on
-              Substack.
-            </p>
-          </div>
-          <div className="mt-6 sm:flex sm:max-w-md lg:mt-0">
-            <a
-              className="mt-4 sm:ml-4 sm:mt-0 sm:shrink-0"
-              href="https://takacsmark.substack.com/subscribe"
-              target="_blank"
-            >
-              <button
-                type="submit"
-                className="flex w-full items-center justify-center bg-blue-400 dark:bg-white px-3 py-2 text-sm font-semibold text-white dark:text-black hover:bg-blue-500 cursor-pointer rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
-              >
-                Subscribe on Substack
-                <ArrowTopRightOnSquareIcon className="ml-2 size-4" />
-              </button>
-            </a>
-          </div>
-        </div>
         <div className="mt-8 border-t border-black/10 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex gap-x-6 md:order-2">
             {navigation.social.map((item) => (

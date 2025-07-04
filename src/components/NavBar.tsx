@@ -10,10 +10,17 @@ import {
 import siteLogo from "../assets/takacsmark-logo-color.svg";
 
 const navigation = [
-  { name: "Home", href: "/", type: "internal" },
+  {
+    name: "Newsletter",
+    href: "https://takacsmark.substack.com",
+    type: "internal",
+  },
   { name: "Links", href: "https://linktr.ee/takacsmark", type: "external" },
-  { name: "Savalera", href: "https://savalera.com", type: "external" },
-  { name: "About Mark", href: "/about", type: "internal" },
+  {
+    name: "Savalera Agentic Lab",
+    href: "https://savalera.com",
+    type: "external",
+  },
 ];
 
 export default function Footer() {
