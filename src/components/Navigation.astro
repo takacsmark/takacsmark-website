@@ -1,0 +1,69 @@
+---
+// src/components/Navigation.astro
+---
+
+<div class="topbar">
+  <div class="topbar-id">
+    <span class="live-dot"></span>
+    <span><span class="prompt">~</span> takacsmark.com</span>
+  </div>
+  <nav class="topbar-nav">
+    <a href="#writing">writing</a>
+    <a href="#about">about</a>
+    <slot />
+  </nav>
+</div>
+
+<style>
+  .topbar {
+    background: linear-gradient(to right, #1e1e3f, #1a2f3f);
+    color: var(--bg2);
+    padding: 0.35rem 2.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+  }
+
+  .topbar-id {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .topbar-id .prompt { 
+    color: var(--pink); 
+    margin-right: 0.2rem; 
+  }
+
+  .topbar-nav {
+    display: flex;
+    gap: 1.8rem;
+  }
+
+  .topbar-nav a {
+    color: var(--bg2);
+    text-decoration: none;
+    opacity: 0.55;
+    font-size: 0.63rem;
+    letter-spacing: 0.08em;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .topbar-nav a:hover { 
+    opacity: 1; 
+    color: var(--teal); 
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 5px; 
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+</style>

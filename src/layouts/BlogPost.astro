@@ -1,44 +1,467 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import Site from "./Site.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import Giscus from "../components/Giscus.astro";
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+import { render } from 'astro:content';
 
-type Props = CollectionEntry<"blog">["data"];
-
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { post } = Astro.props;
+const { Content } = await render(post);
 ---
 
-<Site>
-  <article>
-    <div class="bg-white px-6 py-32 lg:px-8">
-      <div class="mx-auto max-w-3xl text-base/7 text-gray-700 prose">
-        <div class="date">
-          <FormattedDate date={pubDate} />
-          {
-            updatedDate && (
-              <div class="last-updated-on">
-                Last updated on <FormattedDate date={updatedDate} />
-              </div>
-            )
-          }
-        </div>
-        <h1
-          class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
-        >
-          {title}
-        </h1>
-        <p class="mt-6 text-xl/8">
-          {description}
-        </p>
-        <slot />
-      </div>
-    </div>
-  </article>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{post.data.title} | Mark Takács</title>
+    <meta name="description" content={post.data.description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=Bungee&display=swap" rel="stylesheet">
+    <script is:inline>
+      // Apply theme immediately to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <TopBar />
 
-  <div class="bg-white px-6 lg:px-8">
-    <div class="mx-auto max-w-3xl text-base/7 text-gray-700 prose">
-      <Giscus />
+    <div class="post-header">
+      <nav class="breadcrumb">
+        <a href="/" class="breadcrumb-link">
+          <span class="p-char">~</span>
+        </a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="/writing" class="breadcrumb-link">writing</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">{post.slug}</span>
+      </nav>
+
+      <article>
+        <header class="article-header">
+          <h1 class="article-title">{post.data.title}</h1>
+
+          <div class="article-meta">
+            <span class="meta-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <>
+                <span class="meta-sep">•</span>
+                <div class="meta-tags">
+                  {post.data.tags.map(tag => (
+                    <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          {post.data.description && (
+            <p class="article-description">{post.data.description}</p>
+          )}
+        </header>
+
+        <div class="article-content">
+          <Content />
+        </div>
+      </article>
     </div>
-  </div>
-</Site>
+
+    <Footer />
+
+    <script is:inline>
+      // Theme toggle handler
+      document.addEventListener('DOMContentLoaded', function() {
+        const themeCheck = document.getElementById('theme-check');
+
+        // Sync checkbox with saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          themeCheck.checked = true;
+        }
+
+        // Toggle theme on change
+        themeCheck?.addEventListener('change', function() {
+          if (this.checked) {
+            localStorage.setItem('theme', 'dark');
+            document.documentElement.classList.add('dark-mode');
+          } else {
+            localStorage.setItem('theme', 'light');
+            document.documentElement.classList.remove('dark-mode');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* ── RESET ── */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ── CSS CUSTOM PROPERTIES ── */
+  :root {
+    --bg:       #f5f5f7;
+    --bg2:      #eeeef2;
+    --ink:      #1e1e2e;
+    --ink2:     #4c4f69;
+    --ink3:     #9ca0b0;
+    --rule:     #d4d4e0;
+
+    /* Charm / Bubbletea accent palette */
+    --pink:     #ea76cb;
+    --mauve:    #8839ef;
+    --teal:     #179299;
+    --sapphire: #209fb5;
+    --green:    #40a02b;
+    --peach:    #fe640b;
+    --lavender: #7287fd;
+
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --bungee: 'Bungee', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── DARK MODE ── */
+  .dark-mode,
+  body:has(#theme-check:checked) {
+    --bg:   #1e1e2e;
+    --bg2:  #181825;
+    --ink:  #cdd6f4;
+    --ink2: #bac2de;
+    --ink3: #6c7086;
+    --rule: #313244;
+  }
+
+  /* ── CURSOR ── */
+  * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ea76cb'/%3E%3C/svg%3E") 8 8, auto !important;
+  }
+
+  a, a *,
+  button, button *,
+  .post-row, .post-row *,
+  .post-featured, .post-featured *,
+  .tag, .tag *,
+  .side-tag, .side-tag *,
+  .breadcrumb-link, .breadcrumb-link * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ea76cb' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ea76cb'/%3E%3C/svg%3E") 12 12, pointer !important;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .topbar {
+      padding: 0.6rem 1.5rem;
+    }
+
+    .post-header {
+      padding: 2rem 1.5rem 0;
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 0.8rem;
+      text-align: center;
+      padding: 0.7rem 1.5rem;
+    }
+
+    footer .fr {
+      justify-content: center;
+    }
+  }
+</style>
+
+<style>
+  .post-header {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 0;
+    opacity: 0;
+    animation: fadeUp 0.55s ease forwards 0.1s;
+  }
+
+  .breadcrumb {
+    font-size: 0.65rem;
+    color: var(--ink3);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb .p-char {
+    color: var(--pink);
+  }
+
+  .breadcrumb-link {
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--teal);
+  }
+
+  .breadcrumb-sep {
+    color: var(--rule);
+  }
+
+  .breadcrumb-current {
+    color: var(--ink3);
+  }
+
+  .article-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .article-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-date {
+    font-size: 0.65rem;
+    color: var(--ink3);
+    letter-spacing: 0.05em;
+  }
+
+  .meta-sep {
+    color: var(--rule);
+    font-size: 0.6rem;
+  }
+
+  .meta-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    padding: 0.1rem 0.45rem;
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tag-ai     { background: #e8f0ff; color: var(--lavender); border: 1px solid #c5d0f8; }
+  .tag-psych  { background: #f0fae8; color: var(--green);    border: 1px solid #c5e8b0; }
+  .tag-res    { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
+  .tag-research { background: #fff0f8; color: var(--pink);   border: 1px solid #f8c5e0; }
+  .tag-exist  { background: #f3efff; color: var(--mauve);    border: 1px solid #d5c5f8; }
+  .tag-existence { background: #f3efff; color: var(--mauve); border: 1px solid #d5c5f8; }
+  .tag-philosophy { background: #f3efff; color: var(--mauve); border: 1px solid #d5c5f8; }
+  .tag-tech   { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
+  .tag-work   { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
+
+  .article-description {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink2);
+    line-height: 1.6;
+    padding: 1rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .article-content {
+    font-family: var(--serif);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 4rem;
+  }
+
+  /* ── ARTICLE CONTENT TYPOGRAPHY ── */
+  .article-content :global(h1),
+  .article-content :global(h2),
+  .article-content :global(h3),
+  .article-content :global(h4) {
+    font-family: var(--serif);
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .article-content :global(h1) { font-size: 2rem; }
+  .article-content :global(h2) { font-size: 1.5rem; }
+  .article-content :global(h3) { font-size: 1.25rem; }
+  .article-content :global(h4) { font-size: 1.1rem; }
+
+  .article-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content :global(a) {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .article-content :global(a:hover) {
+    text-decoration-color: var(--teal);
+  }
+
+  .article-content :global(strong) {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .article-content :global(em) {
+    font-style: italic;
+  }
+
+  .article-content :global(code) {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--bg2);
+    color: var(--pink);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    border: 1px solid var(--rule);
+  }
+
+  .article-content :global(pre) {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    background: var(--bg2);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.2rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .article-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--ink);
+  }
+
+  /* Shiki dual theme support */
+  .article-content :global(pre.astro-code) {
+    background: var(--bg2) !important;
+  }
+
+  /* Override inline color styles to use dark theme in dark mode */
+  .dark-mode .article-content :global(pre.astro-code span),
+  body:has(#theme-check:checked) .article-content :global(pre.astro-code span) {
+    color: var(--shiki-dark) !important;
+  }
+
+  /* Override background color for code blocks in dark mode */
+  .dark-mode .article-content :global(pre.astro-code),
+  body:has(#theme-check:checked) .article-content :global(pre.astro-code) {
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .article-content :global(blockquote) {
+    border-left: 3px solid var(--teal);
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    color: var(--ink2);
+    font-style: italic;
+  }
+
+  .article-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+    margin: 1.5rem 0;
+  }
+
+  .article-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  .article-content :global(th) {
+    background: var(--bg2);
+    color: var(--ink);
+    font-weight: 600;
+    padding: 0.7rem;
+    text-align: left;
+    border: 1px solid var(--rule);
+  }
+
+  .article-content :global(td) {
+    padding: 0.7rem;
+    border: 1px solid var(--rule);
+  }
+</style>

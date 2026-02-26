@@ -1,68 +1,83 @@
 ---
-import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import reflectiveAgentImage from "../assets/reflective-agent.jpeg";
-
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-
-const allPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-const featuredPost = allPosts[0];
-const posts = allPosts.slice(1, 3);
+// src/components/Hero.astro
 ---
 
-<section>
-  <div class="relative isolate overflow-hidden pt-14">
-    <div class="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
-      <div
-        class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8"
-      >
-        <h1
-          class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto"
-        >
-          The Reflective Agent Newsletter
-        </h1>
-        <div class="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-          <p class="text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-            What if this is the time to ask the Big Questions?
-            <br />
-            <br />
-            What if AI is not a threat, but a tool to understand consciousness, cognition,
-            and what makes us human?
-            <br />
-            <br />
-            The Reflective Agent shares lab notes from our journey exploring these
-            questions.
-          </p>
-          <div class="mt-10 flex items-center gap-x-6">
-            <a
-              class="mt-4 sm:mt-0 sm:shrink-0"
-              href="https://takacsmark.substack.com/subscribe"
-              target="_blank"
-            >
-              <button
-                type="submit"
-                class="flex w-full items-center justify-center bg-blue-400 dark:bg-white px-3 py-2 text-sm font-semibold text-white dark:text-black hover:bg-blue-500 cursor-pointer rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
-              >
-                Subscribe on Substack
-                <ArrowTopRightOnSquareIcon className="ml-2 size-4" />
-              </button>
-            </a>
-          </div>
-        </div>
-        <Image
-          src={reflectiveAgentImage}
-          width={600}
-          alt="Reflective Agent by Mark Takacs Newsletter Image"
-          class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
-        />
-      </div>
-    </div>
-    <div
-      class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"
-    >
+<header>
+  <div class="prompt-line">
+    <span class="p-char">$</span>
+    <span class="p-cmd">find</span>
+    <span class="p-arg">/ -name "purpose"</span>
+    <span class="p-arg">2>/dev/null</span>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-name">MARK<br><span class="dim">TAKÁCS</span></div>
     </div>
   </div>
-</section>
+  <div class="hero-tagline">
+    <span class="tl-item">Indie AI researcher</span>
+    <span class="tl-sep">/</span>
+    <span class="tl-item">builder</span>
+    <span class="tl-sep">/</span>
+    <span class="tl-item">writer</span>
+    <span class="tl-sep">/</span>
+    <span class="tl-item">thinker on human existence</span>
+    <span class="tl-sep">/</span>
+    <span class="tl-item">Budapest</span>
+  </div>
+  <hr class="header-rule">
+</header>
+
+<style>
+  header {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 0;
+    opacity: 0;
+    animation: fadeUp 0.55s ease forwards 0.1s;
+  }
+
+  .prompt-line {
+    font-size: 0.68rem;
+    color: var(--ink3);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .prompt-line .p-char { color: var(--pink); }
+  .prompt-line .p-cmd  { color: var(--teal); }
+  .prompt-line .p-arg  { color: var(--sapphire); }
+
+  .hero-name {
+    font-family: var(--bungee);
+    font-size: clamp(1.9rem, 4.4vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .hero-name .dim { color: var(--sapphire); }
+
+  .hero-tagline {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    color: var(--ink3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0;
+  }
+
+  .tl-item { color: var(--ink2); }
+  .tl-sep  { color: var(--rule); padding: 0 0.5rem; }
+  .tl-item.hl { color: var(--teal); }
+
+  .header-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 1.8rem 0 0;
+  }
+</style>

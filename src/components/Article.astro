@@ -1,0 +1,165 @@
+---
+// src/components/Article.astro
+type Post = {
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    tags?: string[];
+  };
+  slug: string;
+};
+
+interface Props {
+  post: Post;
+  featured?: boolean;
+}
+
+const { post, featured = false }: Props = Astro.props;
+---
+
+{featured ? (
+  <a class="post-featured" href={`/blog/${post.slug}`}>
+    <div class="feat-meta">
+      {post.data.tags?.map(tag => (
+        <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+      ))}
+      <span class="feat-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>
+      <span class="feat-latest">// latest</span>
+    </div>
+    <div class="feat-title">{post.data.title}</div>
+    <div class="feat-pull">{post.data.description}</div>
+  </a>
+) : (
+  <a class="post-row" href={`/blog/${post.slug}`}>
+    <div class="row-tags">
+      {post.data.tags?.map(tag => (
+        <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+      ))}
+      <span class="row-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>
+    </div>
+    <div class="row-title">{post.data.title}</div>
+    <div class="row-pull">{post.data.description}</div>
+  </a>
+)}
+
+<style>
+  .post-featured {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1.2rem 0 1.4rem;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.25s;
+  }
+
+  .post-featured:hover .feat-title { color: var(--teal); }
+
+  .feat-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.6rem;
+  }
+
+  .tag {
+    padding: 0.1rem 0.45rem;
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tag-ai     { background: #e8f0ff; color: var(--lavender); border: 1px solid #c5d0f8; }
+  .tag-psych  { background: #f0fae8; color: var(--green);    border: 1px solid #c5e8b0; }
+  .tag-res    { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
+  .tag-research { background: #fff0f8; color: var(--pink);   border: 1px solid #f8c5e0; }
+  .tag-exist  { background: #f3efff; color: var(--mauve);    border: 1px solid #d5c5f8; }
+  .tag-existence { background: #f3efff; color: var(--mauve); border: 1px solid #d5c5f8; }
+  .tag-philosophy { background: #f3efff; color: var(--mauve); border: 1px solid #d5c5f8; }
+  .tag-tech   { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
+  .tag-work   { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
+
+  .feat-latest {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: var(--pink);
+    margin-left: auto;
+  }
+
+  .feat-date {
+    font-size: 0.6rem;
+    color: var(--ink3);
+  }
+
+  .feat-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 0.55rem;
+    transition: color 0.2s;
+  }
+
+  .feat-pull {
+    font-family: var(--serif);
+    font-size: 0.92rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink2);
+    line-height: 1.65;
+  }
+
+  .post-row {
+    display: block;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--bg2);
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.4s ease, transform 0.4s ease, background 0.15s;
+  }
+
+  .post-row:hover {
+    background: rgba(0, 0, 0, 0.02);
+    margin: 0 -1.2rem;
+    padding: 1.4rem 1.2rem;
+  }
+
+  .dark-mode .post-row:hover,
+  body:has(#theme-check:checked) .post-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .post-row:hover .row-title { color: var(--teal); }
+
+  .row-tags { display: flex; gap: 0.4rem; align-items: center; margin-bottom: 0.4rem; }
+
+  .row-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    transition: color 0.15s;
+  }
+
+  .row-pull {
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink3);
+    line-height: 1.5;
+  }
+
+  .row-date {
+    font-size: 0.58rem;
+    color: var(--ink3);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    padding-top: 0.2rem;
+  }
+</style>

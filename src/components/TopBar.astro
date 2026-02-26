@@ -1,0 +1,110 @@
+---
+// src/components/TopBar.astro
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<div class="topbar-wrapper">
+  <div class="topbar">
+    <div class="topbar-id">
+      <span class="live-dot"></span>
+      <a href="/" class="site-link"><span class="prompt">~</span> takacsmark.com</a>
+    </div>
+    <nav class="topbar-nav">
+      <a href="/writing">writing</a>
+      <a href="/about">about</a>
+      <ThemeToggle />
+    </nav>
+  </div>
+  <div class="topbar-separator">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div>
+</div>
+
+<style>
+  .topbar-wrapper {
+    background: var(--bg);
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+  }
+
+  .topbar {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0.6rem 2.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .topbar-separator {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    color: var(--rule);
+    font-size: 0.5rem;
+    line-height: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0.4;
+  }
+
+  .topbar-id {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .topbar-id .prompt {
+    color: var(--pink);
+    margin-right: 0.2rem;
+  }
+
+  .topbar-id .site-link {
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .topbar-id .site-link:hover {
+    color: var(--teal);
+  }
+
+  .topbar-nav {
+    display: flex;
+    gap: 1.8rem;
+    align-items: center;
+  }
+
+  .topbar-nav a {
+    color: var(--ink2);
+    text-decoration: none;
+    opacity: 0.7;
+    font-size: 0.63rem;
+    letter-spacing: 0.08em;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .topbar-nav a:hover {
+    opacity: 1;
+    color: var(--teal);
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @media (max-width: 768px) {
+    .topbar {
+      padding: 0.6rem 1.5rem;
+    }
+
+    .topbar-separator {
+      padding: 0 1.5rem;
+    }
+  }
+</style>

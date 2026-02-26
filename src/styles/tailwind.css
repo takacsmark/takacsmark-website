@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply antialiased;
+    @apply bg-bg text-ink;
+    @apply font-mono text-base leading-relaxed;
+    overflow-x: hidden;
+  }
+
+  :root {
+    color-scheme: light dark;
+  }
+}
+
+@layer utilities {
+  .dark body {
+    --bg:   #1e1e2e;
+    --bg2:  #181825;
+    --ink:  #cdd6f4;
+    --ink2: #bac2de;
+    --ink3: #6c7086;
+    --rule: #313244;
+  }
+  
+  body:has(#theme-check:checked) {
+    --bg:   #1e1e2e;
+    --bg2:  #181825;
+    --ink:  #cdd6f4;
+    --ink2: #bac2de;
+    --ink3: #6c7086;
+    --rule: #313244;
+  }
+  
+  body:has(#theme-check:checked) .topbar { 
+    background: linear-gradient(to right, #11111f, #111820); 
+  }
+  
+  body:has(#theme-check:checked) .topbar-id,
+  body:has(#theme-check:checked) .topbar-nav a,
+  body:has(#theme-check:checked) .theme-toggle { 
+    color: #cdd6f4; 
+  }
+  
+  body:has(#theme-check:checked) footer   { 
+    background: linear-gradient(to right, #11111f, #111820); 
+  }
+  
+  body:has(#theme-check:checked) footer,
+  body:has(#theme-check:checked) footer a,
+  body:has(#theme-check:checked) footer .fl { 
+    color: #cdd6f4; 
+  }
+}
+
+@layer components {
+  .prose {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-gray-900 dark:text-white font-bold mt-8 mb-4;
+  }
+  
+  .prose h1 {
+    @apply text-4xl;
+  }
+  
+  .prose h2 {
+    @apply text-3xl;
+  }
+  
+  .prose h3 {
+    @apply text-2xl;
+  }
+  
+  .prose h4 {
+    @apply text-xl;
+  }
+  
+  .prose p {
+    @apply mb-4 text-lg leading-relaxed;
+  }
+  
+  .prose a {
+    @apply text-blue-600 dark:text-blue-400 hover:underline;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-900 dark:bg-gray-950 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0 text-gray-100 dark:text-gray-300;
+  }
+  
+  .prose ul {
+    @apply mb-4 pl-6 list-disc;
+  }
+  
+  .prose ol {
+    @apply mb-4 pl-6 list-decimal;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-blue-600 dark:border-blue-400 pl-4 italic my-4 text-gray-600 dark:text-gray-400;
+  }
+  
+  .prose table {
+    @apply w-full mb-4;
+  }
+  
+  .prose th {
+    @apply bg-gray-100 dark:bg-gray-800 p-2 text-left;
+  }
+  
+  .prose td {
+    @apply p-2 border-t border-gray-200 dark:border-gray-700;
+  }
+  
+  .prose img {
+    @apply max-w-full h-auto my-4;
+  }
+}
+
+.dark {
+  color-scheme: dark;
+}

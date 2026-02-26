@@ -1,0 +1,34 @@
+---
+// src/pages/blog.astro
+import { getCollection } from 'astro:content';
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+import Article from '../components/Article.astro';
+
+const posts = await getCollection('blog');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog - Mark Takács</title>
+    <meta name="description" content="All posts on my blog" />
+    <link rel="stylesheet" href="../styles/tailwind.css" />
+  </head>
+  <body>
+    <TopBar />
+
+    <div class="layout">
+      <main id="writing">
+        <h2 class="sec-label">Writing</h2>
+        {posts.map(post => (
+          <Article post={post} />
+        ))}
+      </main>
+    </div>
+
+    <Footer />
+  </body>
+</html>
