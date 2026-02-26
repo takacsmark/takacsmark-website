@@ -1,0 +1,144 @@
+<div class="newsletter-wrap">
+  <span class="newsletter-label">// never miss a post</span>
+  <p class="newsletter-desc">Stay updated with new writing on AI, research, and human existence.</p>
+  <form class="newsletter-form" id="mc-form" novalidate>
+    <input
+      type="email"
+      id="mc-email"
+      name="EMAIL"
+      class="newsletter-input"
+      placeholder="your@email.com"
+      required
+      autocomplete="email"
+    />
+    <button type="submit" class="newsletter-btn">subscribe →</button>
+  </form>
+  <p class="newsletter-msg" id="mc-msg" aria-live="polite"></p>
+</div>
+
+<script is:inline>
+  (function () {
+    var ACTION = 'https://takacsmark.us3.list-manage.com/subscribe/post-json?u=ced6e070ab6dca9ddc1f65334&id=3983723c21&v_id=5137&f_id=007424e2f0';
+    var form = document.getElementById('mc-form');
+    var msg  = document.getElementById('mc-msg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('mc-email').value.trim();
+      if (!email) return;
+
+      msg.textContent = '...';
+      msg.className = 'newsletter-msg';
+
+      var cbName = '__mcCallback_' + Date.now();
+      var url = ACTION + '&EMAIL=' + encodeURIComponent(email) + '&c=' + cbName;
+
+      window[cbName] = function (data) {
+        delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        if (data.result === 'success') {
+          msg.textContent = '// subscribed ✓';
+          msg.className = 'newsletter-msg mc-success';
+          form.reset();
+        } else {
+          var text = data.msg || 'something went wrong';
+          // strip Mailchimp's "0 - " prefix
+          msg.textContent = text.replace(/^\d+ - /, '');
+          msg.className = 'newsletter-msg mc-error';
+        }
+      };
+
+      var script = document.createElement('script');
+      script.src = url;
+      document.body.appendChild(script);
+    });
+  })();
+</script>
+
+<style>
+  .newsletter-wrap {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem 2rem;
+  }
+
+  .newsletter-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--pink);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .newsletter-desc {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink2);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    min-width: 200px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    background: var(--bg2);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.7rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .newsletter-input:focus {
+    border-color: var(--teal);
+  }
+
+  .newsletter-input::placeholder {
+    color: var(--ink3);
+  }
+
+  .newsletter-btn {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--ink2);
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.9rem;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+
+  .newsletter-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: var(--bg2);
+  }
+
+  .newsletter-msg {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    margin-top: 0.6rem;
+    min-height: 1.2em;
+  }
+
+  .mc-success { color: var(--teal); }
+  .mc-error   { color: var(--pink); }
+
+  @media (max-width: 768px) {
+    .newsletter-wrap {
+      padding: 1.5rem 1.5rem 2rem;
+    }
+  }
+</style>

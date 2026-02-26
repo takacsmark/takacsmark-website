@@ -22,7 +22,7 @@ const { post, featured = false }: Props = Astro.props;
   <a class="post-featured" href={`/blog/${post.slug}`}>
     <div class="feat-meta">
       {post.data.tags?.map(tag => (
-        <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+        <span class={`tag tag-${tag.toLowerCase()}`} data-tag-href={`/blog/tag/${tag.toLowerCase()}`}>{tag}</span>
       ))}
       <span class="feat-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>
       <span class="feat-latest">// latest</span>
@@ -34,7 +34,7 @@ const { post, featured = false }: Props = Astro.props;
   <a class="post-row" href={`/blog/${post.slug}`}>
     <div class="row-tags">
       {post.data.tags?.map(tag => (
-        <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+        <span class={`tag tag-${tag.toLowerCase()}`} data-tag-href={`/blog/tag/${tag.toLowerCase()}`}>{tag}</span>
       ))}
       <span class="row-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>
     </div>
@@ -163,3 +163,12 @@ const { post, featured = false }: Props = Astro.props;
     padding-top: 0.2rem;
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tag-href]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      window.location.href = el.dataset.tagHref!;
+    });
+  });
+</script>

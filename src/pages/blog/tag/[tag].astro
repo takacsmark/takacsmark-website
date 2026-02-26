@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import TopBar from '../../../components/TopBar.astro';
+import Footer from '../../../components/Footer.astro';
+import Article from '../../../components/Article.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tagMap = new Map<string, { label: string; posts: typeof posts }>();
+
+  posts.forEach(post => {
+    (post.data.tags ?? []).forEach(tag => {
+      const key = tag.toLowerCase();
+      if (!tagMap.has(key)) tagMap.set(key, { label: tag, posts: [] });
+      tagMap.get(key)!.posts.push(post);
+    });
+  });
+
+  return [...tagMap.entries()].map(([tag, { label, posts }]) => ({
+    params: { tag },
+    props: {
+      tagLabel: label,
+      posts: posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { tagLabel, posts } = Astro.props;
+const { tag } = Astro.params;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>#{tagLabel} | Mark Takács</title>
+    <meta name="description" content={`All posts tagged ${tagLabel} by Mark Takács.`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=Bungee&display=swap" rel="stylesheet">
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') document.documentElement.classList.add('dark-mode');
+      })();
+    </script>
+  </head>
+  <body>
+    <TopBar />
+
+    <div class="tag-header">
+      <nav class="breadcrumb">
+        <a href="/" class="breadcrumb-link"><span class="p-char">~</span></a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="/writing" class="breadcrumb-link">writing</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">#{tag}</span>
+      </nav>
+
+      <div class="prompt-line">
+        <span class="p-char">$</span>
+        <span class="p-cmd">grep</span>
+        <span class="p-flag">-r</span>
+        <span class="p-arg">"{tag}"</span>
+        <span class="p-path">~/writing/</span>
+      </div>
+      <h1 class="page-title">#{tagLabel}</h1>
+      <p class="page-subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged <span class={`tag tag-${tag}`}>{tagLabel}</span></p>
+      <hr class="header-rule">
+    </div>
+
+    <div class="layout">
+      <main>
+        {posts.map(post => (
+          <Article post={post} />
+        ))}
+      </main>
+    </div>
+
+    <Footer />
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        const themeCheck = document.getElementById('theme-check');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') themeCheck.checked = true;
+        themeCheck?.addEventListener('change', function() {
+          if (this.checked) {
+            localStorage.setItem('theme', 'dark');
+            document.documentElement.classList.add('dark-mode');
+          } else {
+            localStorage.setItem('theme', 'light');
+            document.documentElement.classList.remove('dark-mode');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f5f7; --bg2: #eeeef2; --ink: #1e1e2e; --ink2: #4c4f69; --ink3: #9ca0b0; --rule: #d4d4e0;
+    --pink: #ea76cb; --mauve: #8839ef; --teal: #179299; --sapphire: #209fb5;
+    --green: #40a02b; --peach: #fe640b; --lavender: #7287fd;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --bungee: 'Bungee', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg); color: var(--ink); font-family: var(--mono);
+    font-size: 13.5px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+
+  .dark-mode, body:has(#theme-check:checked) {
+    --bg: #1e1e2e; --bg2: #181825; --ink: #cdd6f4; --ink2: #bac2de; --ink3: #6c7086; --rule: #313244;
+  }
+
+  * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ea76cb'/%3E%3C/svg%3E") 8 8, auto !important;
+  }
+
+  a, a *, button, button *,
+  .post-row, .post-row *, .post-featured, .post-featured *,
+  .tag, .tag *, .side-tag, .side-tag * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ea76cb' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ea76cb'/%3E%3C/svg%3E") 12 12, pointer !important;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  @media (max-width: 768px) {
+    .topbar { padding: 0.35rem 1.5rem; }
+    .tag-header { padding: 2rem 1.5rem 0; }
+    .layout { padding: 0 1.5rem 3rem; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    footer .fr { justify-content: center; }
+  }
+</style>
+
+<style>
+  .tag-header {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 0;
+    opacity: 0;
+    animation: fadeUp 0.55s ease forwards 0.1s;
+  }
+
+  .breadcrumb {
+    font-size: 0.65rem;
+    color: var(--ink3);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb .p-char { color: var(--pink); }
+
+  .breadcrumb-link {
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb-link:hover { color: var(--teal); }
+  .breadcrumb-sep { color: var(--rule); }
+  .breadcrumb-current { color: var(--ink3); }
+
+  .prompt-line {
+    font-size: 0.68rem;
+    color: var(--ink3);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .prompt-line .p-char  { color: var(--pink); }
+  .prompt-line .p-cmd   { color: var(--teal); }
+  .prompt-line .p-flag  { color: var(--ink3); }
+  .prompt-line .p-arg   { color: var(--peach); }
+  .prompt-line .p-path  { color: var(--sapphire); }
+
+  .page-title {
+    font-family: var(--bungee);
+    font-size: clamp(1.9rem, 4.4vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .page-subtitle {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    color: var(--ink2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.1rem 0.45rem;
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tag-ai       { background: #e8f0ff; color: var(--lavender); border: 1px solid #c5d0f8; }
+  .tag-psych    { background: #f0fae8; color: var(--green);    border: 1px solid #c5e8b0; }
+  .tag-res      { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
+  .tag-research { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
+  .tag-exist    { background: #f3efff; color: var(--mauve);    border: 1px solid #d5c5f8; }
+  .tag-existence  { background: #f3efff; color: var(--mauve);  border: 1px solid #d5c5f8; }
+  .tag-philosophy { background: #f3efff; color: var(--mauve);  border: 1px solid #d5c5f8; }
+  .tag-tech     { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
+  .tag-work     { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
+
+  .header-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 1.8rem 0 0;
+  }
+
+  .layout {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 2.5rem 5rem;
+  }
+</style>
