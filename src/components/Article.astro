@@ -36,7 +36,7 @@ const dateStr = post.data.pubDate.toLocaleDateString('en-US', {
     display: block;
     text-decoration: none;
     color: inherit;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding: 0.75rem 1rem;
     margin-left: -1rem;
     margin-right: -1rem;
@@ -45,16 +45,16 @@ const dateStr = post.data.pubDate.toLocaleDateString('en-US', {
   }
 
   .post-item.is-featured {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
   }
 
   .post-item:hover {
-    background: rgba(234, 118, 203, 0.13);
+    background: var(--bg2);
   }
 
   .post-date {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.6rem;
+    font-size: 0.78rem;
     color: var(--ink3);
     letter-spacing: 0.05em;
     margin-bottom: 0.45rem;
@@ -66,7 +66,7 @@ const dateStr = post.data.pubDate.toLocaleDateString('en-US', {
 
   .post-title {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.4;
     letter-spacing: -0.01em;
@@ -76,7 +76,7 @@ const dateStr = post.data.pubDate.toLocaleDateString('en-US', {
 
   .post-desc {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-weight: 400;
     color: var(--ink3);
     line-height: 1.75;

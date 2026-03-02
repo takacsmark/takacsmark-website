@@ -5,7 +5,7 @@ pubDate: 2025-01-01
 tags: ["AI", "Tech"]
 ---
 
-# Welcome to My Blog
+## Welcome to My Blog
 
 This is my first post using Astro, Tailwind CSS, and Cloudflare Pages. I'm excited to share my thoughts and ideas with the world!
 
@@ -33,3 +33,5 @@ console.log(greet('World'));
 ## Conclusion
 
 I'm looking forward to writing more posts and building out this blog. Stay tuned for more content!
+
+Also check out [My Second Post](/blog/my-second-post).

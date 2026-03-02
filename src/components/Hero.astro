@@ -9,7 +9,7 @@
     <span class="p-arg">/ -name "purpose"</span>
     <span class="p-arg">2>/dev/null</span>
   </div>
-  <div class="hero-name">MARK<span class="dim"> TAKÁCS</span></div>
+  <div class="hero-name">Blog <span class="by">by</span> Mark<span class="dim"> Takács</span></div>
   <div class="hero-tagline">
     <span class="tl-item">Indie AI researcher</span>
     <span class="tl-sep">/</span>
@@ -22,19 +22,20 @@
     <span class="tl-item">Budapest</span>
   </div>
 </header>
+<div class="hero-separator">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div>
 
 <style>
   header {
     max-width: 768px;
     margin: 0 auto;
-    padding: 1.2rem 2.5rem 2rem;
+    padding: 1.2rem 1.5rem 2rem;
     opacity: 0;
     animation: fadeUp 0.55s ease forwards 0.1s;
   }
 
   .prompt-line {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.63rem;
+    font-size: 0.88rem;
     color: var(--ink3);
     margin-bottom: 0.5rem;
     display: flex;
@@ -57,11 +58,12 @@
   }
 
   .hero-name .dim { color: var(--sapphire); }
+  .hero-name .by  { font-size: 0.6em; color: var(--ink3); vertical-align: middle; }
 
   .hero-tagline {
     margin-top: 0.55rem;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.66rem;
+    font-size: 0.88rem;
     color: var(--ink3);
     display: flex;
     flex-wrap: wrap;
@@ -71,7 +73,20 @@
   .tl-item { color: var(--ink2); }
   .tl-sep  { color: var(--rule); padding: 0 0.45rem; }
 
+  .hero-separator {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    color: var(--rule);
+    font-size: 0.5rem;
+    line-height: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0.4;
+  }
+
   @media (max-width: 768px) {
-    header { padding: 1rem 1.5rem 1.6rem; }
+    header { padding: 1rem 1rem 1.6rem; }
+    .hero-separator { padding: 0 1rem; }
   }
 </style>

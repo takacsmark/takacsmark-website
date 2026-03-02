@@ -18,6 +18,7 @@ const otherPosts = posts.slice(1);
     <meta name="viewport" content="width=device-width" />
     <title>Mark Takács</title>
     <meta name="description" content="Indie AI researcher, builder, writer, and thinker on human existence." />
+    <link rel="alternate" type="application/rss+xml" title="Mark Takács" href="/rss.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Bungee&display=swap" rel="stylesheet">
@@ -94,7 +95,7 @@ const otherPosts = posts.slice(1);
     --pink:     #ea76cb;
     --mauve:    #8839ef;
     --teal:     #179299;
-    --sapphire: #209fb5;
+    --sapphire: #00d4f5;
     --green:    #40a02b;
     --peach:    #fe640b;
     --lavender: #7287fd;
@@ -130,17 +131,9 @@ const otherPosts = posts.slice(1);
   }
 
   /* ── CURSOR ── */
-  * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ea76cb'/%3E%3C/svg%3E") 8 8, auto !important;
-  }
-
-  a, a *,
-  button, button *,
-  .post-row, .post-row *,
-  .post-featured, .post-featured *,
-  .tag, .tag *,
-  .side-tag, .side-tag * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ea76cb' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ea76cb'/%3E%3C/svg%3E") 12 12, pointer !important;
+  a, button, [role="button"],
+  .post-row, .post-featured, .tag, .side-tag {
+    cursor: pointer;
   }
 
   /* ── ANIMATIONS ── */
@@ -170,7 +163,7 @@ const otherPosts = posts.slice(1);
     }
 
     .layout {
-      padding: 0 1.5rem 3rem;
+      padding: 1.5rem 1rem 3rem;
     }
 
     footer {
@@ -189,7 +182,7 @@ const otherPosts = posts.slice(1);
   .layout {
     max-width: 768px;
     margin: 0 auto;
-    padding: 2.5rem 2.5rem 5rem;
+    padding: 2rem 1.5rem 4rem;
   }
 
   .more-btn {
@@ -197,7 +190,7 @@ const otherPosts = posts.slice(1);
     background: none;
     border: none;
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.88rem;
     letter-spacing: 0.08em;
     color: var(--ink3);
     padding: 0;
@@ -208,6 +201,6 @@ const otherPosts = posts.slice(1);
     text-decoration: none;
   }
 
-  .more-btn:hover { color: var(--teal); }
-  .more-btn::before { content: '→'; color: var(--teal); }
+  .more-btn:hover { color: var(--sapphire); }
+  .more-btn::before { content: '→'; color: var(--sapphire); }
 </style>

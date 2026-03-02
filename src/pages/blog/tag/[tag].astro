@@ -65,7 +65,7 @@ const { tag } = Astro.params;
         <span class="p-arg">"{tag}"</span>
         <span class="p-path">~/writing/</span>
       </div>
-      <h1 class="page-title">#{tagLabel}</h1>
+      <h1 class="page-title"><span class="title-dim">#{tagLabel}</span></h1>
       <p class="page-subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged <span class={`tag tag-${tag}`}>{tagLabel}</span></p>
       <hr class="header-rule">
     </div>
@@ -103,8 +103,8 @@ const { tag } = Astro.params;
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f5f5f7; --bg2: #eeeef2; --ink: #1e1e2e; --ink2: #4c4f69; --ink3: #9ca0b0; --rule: #d4d4e0;
-    --pink: #ea76cb; --mauve: #8839ef; --teal: #179299; --sapphire: #209fb5;
+    --bg: #ffffff; --bg2: #f5f5f7; --ink: #1e1e2e; --ink2: #4c4f69; --ink3: #9ca0b0; --rule: #e0e0e8;
+    --pink: #ea76cb; --mauve: #8839ef; --teal: #179299; --sapphire: #00d4f5;
     --green: #40a02b; --peach: #fe640b; --lavender: #7287fd;
     --mono: 'JetBrains Mono', 'Courier New', monospace;
     --serif: 'Source Serif 4', Georgia, serif;
@@ -122,24 +122,14 @@ const { tag } = Astro.params;
     --bg: #1e1e2e; --bg2: #181825; --ink: #cdd6f4; --ink2: #bac2de; --ink3: #6c7086; --rule: #313244;
   }
 
-  * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ea76cb'/%3E%3C/svg%3E") 8 8, auto !important;
-  }
-
-  a, a *, button, button *,
-  .post-row, .post-row *, .post-featured, .post-featured *,
-  .tag, .tag *, .side-tag, .side-tag * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ea76cb' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ea76cb'/%3E%3C/svg%3E") 12 12, pointer !important;
-  }
-
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 
   @media (max-width: 768px) {
     .topbar { padding: 0.35rem 1.5rem; }
-    .tag-header { padding: 2rem 1.5rem 0; }
-    .layout { padding: 0 1.5rem 3rem; }
+    .tag-header { padding: 1.5rem 1rem 0; }
+    .layout { padding: 1.5rem 1rem 3rem; }
     footer { flex-direction: column; gap: 0.4rem; text-align: center; }
     footer .fr { justify-content: center; }
   }
@@ -149,13 +139,13 @@ const { tag } = Astro.params;
   .tag-header {
     max-width: 768px;
     margin: 0 auto;
-    padding: 2.5rem 2.5rem 0;
+    padding: 2rem 1.5rem 0;
     opacity: 0;
     animation: fadeUp 0.55s ease forwards 0.1s;
   }
 
   .breadcrumb {
-    font-size: 0.65rem;
+    font-size: 0.88rem;
     color: var(--ink3);
     margin-bottom: 1.5rem;
     display: flex;
@@ -171,12 +161,12 @@ const { tag } = Astro.params;
     transition: color 0.2s;
   }
 
-  .breadcrumb-link:hover { color: var(--teal); }
+  .breadcrumb-link:hover { color: var(--sapphire); }
   .breadcrumb-sep { color: var(--rule); }
   .breadcrumb-current { color: var(--ink3); }
 
   .prompt-line {
-    font-size: 0.68rem;
+    font-size: 0.88rem;
     color: var(--ink3);
     margin-bottom: 0.4rem;
     display: flex;
@@ -185,24 +175,26 @@ const { tag } = Astro.params;
   }
 
   .prompt-line .p-char  { color: var(--pink); }
-  .prompt-line .p-cmd   { color: var(--teal); }
+  .prompt-line .p-cmd   { color: var(--sapphire); }
   .prompt-line .p-flag  { color: var(--ink3); }
   .prompt-line .p-arg   { color: var(--peach); }
   .prompt-line .p-path  { color: var(--sapphire); }
 
   .page-title {
     font-family: var(--bungee);
-    font-size: clamp(1.9rem, 4.4vw, 3.8rem);
+    font-size: clamp(1.4rem, 3vw, 2rem);
     font-weight: 400;
     letter-spacing: 0.02em;
-    line-height: 0.95;
+    line-height: 1;
     color: var(--ink);
     text-transform: uppercase;
   }
 
+  .title-dim { color: var(--ink3); }
+
   .page-subtitle {
     margin-top: 1rem;
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     color: var(--ink2);
     display: flex;
     align-items: center;
@@ -211,7 +203,8 @@ const { tag } = Astro.params;
 
   .tag {
     padding: 0.1rem 0.45rem;
-    font-size: 0.58rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -236,6 +229,6 @@ const { tag } = Astro.params;
   .layout {
     max-width: 768px;
     margin: 0 auto;
-    padding: 0 2.5rem 5rem;
+    padding: 2rem 1.5rem 4rem;
   }
 </style>

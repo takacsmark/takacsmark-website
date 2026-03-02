@@ -5,7 +5,7 @@ pubDate: 2025-01-15
 tags: ["Tech", "Exist"]
 ---
 
-# Building a Minimalist Blog
+## Building a Minimalist Blog
 
 In this post, I'll walk through the process of building a minimalist blog using modern web technologies.
 
@@ -31,3 +31,5 @@ This blog uses:
 ## Final Thoughts
 
 Minimalism isn't about having less - it's about having focus. When you remove the unnecessary, the important things shine through.
+
+Also check out [My First Post](/blog/my-first-post).

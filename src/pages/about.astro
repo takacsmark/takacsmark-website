@@ -33,7 +33,7 @@ import Footer from '../components/Footer.astro';
         <span class="p-cmd">cat</span>
         <span class="p-arg">~/about.txt</span>
       </div>
-      <h1 class="page-title">About</h1>
+      <h1 class="page-title"><span class="title-accent">About</span></h1>
       <hr class="header-rule">
     </div>
 
@@ -129,18 +129,18 @@ import Footer from '../components/Footer.astro';
 
   /* ── CSS CUSTOM PROPERTIES ── */
   :root {
-    --bg:       #f5f5f7;
-    --bg2:      #eeeef2;
-    --ink:      #1e1e2e;
+    --bg:       #ffffff;
+    --bg2:      #f5f5f7;
+    --ink:      #28282e;
     --ink2:     #4c4f69;
     --ink3:     #9ca0b0;
-    --rule:     #d4d4e0;
+    --rule:     #e0e0e8;
 
     /* Charm / Bubbletea accent palette */
     --pink:     #ea76cb;
     --mauve:    #8839ef;
     --teal:     #179299;
-    --sapphire: #209fb5;
+    --sapphire: #00d4f5;
     --green:    #40a02b;
     --peach:    #fe640b;
     --lavender: #7287fd;
@@ -175,21 +175,6 @@ import Footer from '../components/Footer.astro';
     --rule: #313244;
   }
 
-  /* ── CURSOR ── */
-  * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ea76cb'/%3E%3C/svg%3E") 8 8, auto !important;
-  }
-
-  a, a *,
-  button, button *,
-  .post-row, .post-row *,
-  .post-featured, .post-featured *,
-  .tag, .tag *,
-  .side-tag, .side-tag *,
-  .contact-link, .contact-link * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ea76cb' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ea76cb'/%3E%3C/svg%3E") 12 12, pointer !important;
-  }
-
   /* ── ANIMATIONS ── */
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -209,15 +194,15 @@ import Footer from '../components/Footer.astro';
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .topbar {
-      padding: 0.6rem 1.5rem;
+      padding: 0.35rem 1.5rem;
     }
 
     .about-header {
-      padding: 2rem 1.5rem 0;
+      padding: 1.5rem 1rem 0;
     }
 
     .layout {
-      padding: 0 1.5rem 3rem;
+      padding: 1.5rem 1rem 3rem;
     }
 
     footer {
@@ -237,13 +222,13 @@ import Footer from '../components/Footer.astro';
   .about-header {
     max-width: 768px;
     margin: 0 auto;
-    padding: 2.5rem 2.5rem 0;
+    padding: 2rem 1.5rem 0;
     opacity: 0;
     animation: fadeUp 0.55s ease forwards 0.1s;
   }
 
   .prompt-line {
-    font-size: 0.68rem;
+    font-size: 0.88rem;
     color: var(--ink3);
     margin-bottom: 0.4rem;
     display: flex;
@@ -252,18 +237,20 @@ import Footer from '../components/Footer.astro';
   }
 
   .prompt-line .p-char { color: var(--pink); }
-  .prompt-line .p-cmd  { color: var(--teal); }
+  .prompt-line .p-cmd  { color: var(--sapphire); }
   .prompt-line .p-arg  { color: var(--sapphire); }
 
   .page-title {
     font-family: var(--bungee);
-    font-size: clamp(1.9rem, 4.4vw, 3.8rem);
+    font-size: clamp(1.4rem, 3vw, 2rem);
     font-weight: 400;
     letter-spacing: 0.02em;
-    line-height: 0.95;
+    line-height: 1;
     color: var(--ink);
     text-transform: uppercase;
   }
+
+  .title-accent { color: var(--sapphire); }
 
   .header-rule {
     border: none;
@@ -274,7 +261,7 @@ import Footer from '../components/Footer.astro';
   .layout {
     max-width: 768px;
     margin: 0 auto;
-    padding: 0 2.5rem 5rem;
+    padding: 2rem 1.5rem 4rem;
   }
 
   .about-content {
@@ -293,17 +280,17 @@ import Footer from '../components/Footer.astro';
   .about-section:nth-child(4) { animation-delay: 0.5s; }
 
   .section-title {
-    font-size: 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.88rem;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--pink);
     margin-bottom: 1rem;
-    font-family: var(--mono);
   }
 
   .about-section p {
-    font-family: var(--serif);
+    font-family: var(--mono);
     font-size: 1.05rem;
     line-height: 1.75;
     color: var(--ink);
@@ -311,7 +298,7 @@ import Footer from '../components/Footer.astro';
   }
 
   .about-section ul {
-    font-family: var(--serif);
+    font-family: var(--mono);
     font-size: 1.05rem;
     line-height: 1.75;
     color: var(--ink);
@@ -329,7 +316,7 @@ import Footer from '../components/Footer.astro';
     content: '→';
     position: absolute;
     left: -0.5rem;
-    color: var(--teal);
+    color: var(--sapphire);
   }
 
   .contact-links {
@@ -346,7 +333,7 @@ import Footer from '../components/Footer.astro';
     color: var(--ink2);
     text-decoration: none;
     font-family: var(--mono);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     padding: 0.8rem 1rem;
     background: var(--bg2);
     border: 1px solid var(--rule);
@@ -355,8 +342,8 @@ import Footer from '../components/Footer.astro';
   }
 
   .contact-link:hover {
-    color: var(--teal);
-    border-color: var(--teal);
+    color: var(--sapphire);
+    border-color: var(--sapphire);
     background: var(--bg);
   }
 

@@ -16,7 +16,7 @@ export default defineConfig({
     }),
     sitemap(),
   ],
-  site: 'https://your-site.cloudflare.app',
+  site: 'https://takacsmark.com',
   base: '',
   trailingSlash: 'never',
   markdown: {
