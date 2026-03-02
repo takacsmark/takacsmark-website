@@ -11,7 +11,8 @@
   body {
     @apply antialiased;
     @apply bg-bg text-ink;
-    @apply font-mono text-base leading-relaxed;
+    @apply font-sans leading-relaxed;
+    font-size: 15px;
     overflow-x: hidden;
   }
 

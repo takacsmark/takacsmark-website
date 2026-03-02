@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#f5f5f7',
-        bg2: '#eeeef2',
+        bg: '#ffffff',
+        bg2: '#f5f5f7',
         ink: '#1e1e2e',
         ink2: '#4c4f69',
         ink3: '#9ca0b0',
@@ -19,6 +19,7 @@ export default {
         lavender: '#7287fd',
       },
       fontFamily: {
+        sans: ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'Courier New', 'monospace'],
         serif: ['Source Serif 4', 'Georgia', 'serif'],
         bungee: ['Bungee', 'sans-serif'],

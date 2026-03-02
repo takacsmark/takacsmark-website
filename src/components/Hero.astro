@@ -9,11 +9,7 @@
     <span class="p-arg">/ -name "purpose"</span>
     <span class="p-arg">2>/dev/null</span>
   </div>
-  <div class="hero-inner">
-    <div>
-      <div class="hero-name">MARK<br><span class="dim">TAKÁCS</span></div>
-    </div>
-  </div>
+  <div class="hero-name">MARK<span class="dim"> TAKÁCS</span></div>
   <div class="hero-tagline">
     <span class="tl-item">Indie AI researcher</span>
     <span class="tl-sep">/</span>
@@ -25,22 +21,22 @@
     <span class="tl-sep">/</span>
     <span class="tl-item">Budapest</span>
   </div>
-  <hr class="header-rule">
 </header>
 
 <style>
   header {
     max-width: 768px;
     margin: 0 auto;
-    padding: 2.5rem 2.5rem 0;
+    padding: 1.2rem 2.5rem 2rem;
     opacity: 0;
     animation: fadeUp 0.55s ease forwards 0.1s;
   }
 
   .prompt-line {
-    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.63rem;
     color: var(--ink3);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.3rem;
@@ -52,10 +48,10 @@
 
   .hero-name {
     font-family: var(--bungee);
-    font-size: clamp(1.9rem, 4.4vw, 3.8rem);
+    font-size: clamp(1.4rem, 3vw, 2rem);
     font-weight: 400;
     letter-spacing: 0.02em;
-    line-height: 0.95;
+    line-height: 1;
     color: var(--ink);
     text-transform: uppercase;
   }
@@ -63,8 +59,9 @@
   .hero-name .dim { color: var(--sapphire); }
 
   .hero-tagline {
-    margin-top: 1rem;
-    font-size: 0.72rem;
+    margin-top: 0.55rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.66rem;
     color: var(--ink3);
     display: flex;
     flex-wrap: wrap;
@@ -72,12 +69,9 @@
   }
 
   .tl-item { color: var(--ink2); }
-  .tl-sep  { color: var(--rule); padding: 0 0.5rem; }
-  .tl-item.hl { color: var(--teal); }
+  .tl-sep  { color: var(--rule); padding: 0 0.45rem; }
 
-  .header-rule {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 1.8rem 0 0;
+  @media (max-width: 768px) {
+    header { padding: 1rem 1.5rem 1.6rem; }
   }
 </style>
