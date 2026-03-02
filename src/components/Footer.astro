@@ -5,7 +5,9 @@
 <div class="footer-wrapper">
   <div class="footer-separator">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div>
   <footer>
-    <span class="fl">mark takács © 2025 — all writing is my own</span>
+    <span class="fl">
+      <span class="fl-name">mark takács © 2025</span><span class="fl-dash"> — </span><span class="fl-tagline">all writing is my own</span>
+    </span>
     <div class="fr">
       <a href="https://savalera.com" target="_blank" rel="noopener" title="Savalera">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
@@ -89,12 +91,29 @@
     display: block;
   }
 
+  :global(.dark-mode) footer .fl,
+  :global(body:has(#theme-check:checked)) footer .fl {
+    opacity: 1;
+    color: var(--ink2);
+  }
+
+  :global(.dark-mode) footer a,
+  :global(body:has(#theme-check:checked)) footer a {
+    opacity: 1;
+    color: var(--ink2);
+  }
+
+  :global(.dark-mode) footer a:hover,
+  :global(body:has(#theme-check:checked)) footer a:hover {
+    color: var(--sapphire);
+  }
+
   @media (max-width: 768px) {
     footer {
       flex-direction: column;
       gap: 0.8rem;
       text-align: center;
-      padding: 0.7rem 1rem;
+      padding: 0.7rem 1rem 2rem;
     }
 
     .footer-separator {
@@ -104,5 +123,13 @@
     footer .fr {
       justify-content: center;
     }
+
+    footer .fl {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .fl-dash { display: none; }
   }
 </style>

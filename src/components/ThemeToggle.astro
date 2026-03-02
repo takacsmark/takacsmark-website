@@ -21,6 +21,17 @@ const label = "Toggle dark mode";
     opacity: 1;
     color: var(--sapphire);
   }
+
+  :global(.dark-mode) .theme-toggle,
+  :global(body:has(#theme-check:checked)) .theme-toggle {
+    opacity: 1;
+    color: var(--ink2);
+  }
+
+  :global(.dark-mode) .theme-toggle:hover,
+  :global(body:has(#theme-check:checked)) .theme-toggle:hover {
+    color: var(--sapphire);
+  }
   .theme-toggle input { 
     display: none; 
   }

@@ -14,15 +14,57 @@ import ThemeToggle from './ThemeToggle.astro';
       <a href="/about">about</a>
       <ThemeToggle />
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
   <div class="topbar-separator">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div>
+  <nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="/writing" class="mobile-link">writing</a>
+    <a href="/about" class="mobile-link">about</a>
+    <label for="theme-check" class="mobile-link mobile-theme">
+      toggle theme
+      <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </label>
+  </nav>
 </div>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    var wrapper = btn.closest('.topbar-wrapper');
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      wrapper.classList.toggle('menu-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+    });
+  })();
+</script>
 
 <style>
   .topbar-wrapper {
     background: var(--bg);
     opacity: 0;
     animation: fadeIn 0.4s ease forwards;
+    position: relative;
+  }
+
+  .topbar-wrapper.menu-open::after {
+    content: '';
+    position: absolute;
+    bottom: -3rem;
+    left: 0;
+    right: 0;
+    height: 3rem;
+    background: linear-gradient(to bottom, rgba(0, 212, 245, 0.10), transparent);
+    pointer-events: none;
   }
 
   .topbar {
@@ -49,16 +91,14 @@ import ThemeToggle from './ThemeToggle.astro';
     opacity: 0.4;
   }
 
+  /* ── IDENTITY ── */
   .topbar-id {
     display: flex;
     align-items: center;
     gap: 0.8rem;
   }
 
-  .topbar-id .prompt {
-    color: var(--pink);
-    margin-right: 0.2rem;
-  }
+  .topbar-id .prompt { color: var(--pink); margin-right: 0.2rem; }
 
   .topbar-id .site-link {
     color: var(--ink2);
@@ -66,10 +106,18 @@ import ThemeToggle from './ThemeToggle.astro';
     transition: color 0.2s;
   }
 
-  .topbar-id .site-link:hover {
-    color: var(--sapphire);
+  .topbar-id .site-link:hover { color: var(--sapphire); }
+
+  .live-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2.5s ease-in-out infinite;
   }
 
+  /* ── DESKTOP NAV ── */
   .topbar-nav {
     display: flex;
     gap: 1.8rem;
@@ -85,27 +133,91 @@ import ThemeToggle from './ThemeToggle.astro';
     transition: opacity 0.2s, color 0.2s;
   }
 
-  .topbar-nav a:hover {
+  .topbar-nav a:hover { opacity: 1; color: var(--sapphire); }
+
+  /* ── HAMBURGER (hidden on desktop) ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--ink2);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.is-open span:nth-child(2) { opacity: 0; }
+  .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ── MOBILE MENU (hidden until open) ── */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0.4rem 1rem 0.8rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+  }
+
+  .mobile-menu.is-open { display: flex; margin-top: -3px; margin-bottom: 3rem; background: rgba(0, 212, 245, 0.10); }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ink2);
+    text-decoration: none;
+    padding: 0.55rem 0;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    .mobile-link:hover { color: var(--sapphire); }
+  }
+
+  .mobile-link:focus { outline: none; color: var(--ink2); }
+
+  /* ── THEME ICON TOGGLE ── */
+  .mobile-theme .icon-sun  { display: none; }
+  .mobile-theme .icon-moon { display: block; }
+
+  :global(.dark-mode) .mobile-theme .icon-sun,
+  :global(body:has(#theme-check:checked)) .mobile-theme .icon-sun  { display: block; }
+
+  :global(.dark-mode) .mobile-theme .icon-moon,
+  :global(body:has(#theme-check:checked)) .mobile-theme .icon-moon { display: none; }
+
+  /* ── DARK MODE ── */
+  :global(.dark-mode) .topbar-nav a,
+  :global(body:has(#theme-check:checked)) .topbar-nav a {
     opacity: 1;
-    color: var(--sapphire);
   }
 
-  .live-dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2.5s ease-in-out infinite;
+  :global(.dark-mode) .topbar-id .site-link,
+  :global(body:has(#theme-check:checked)) .topbar-id .site-link {
+    color: var(--ink);
   }
 
-  @media (max-width: 768px) {
-    .topbar {
-      padding: 0.6rem 1rem;
-    }
-
-    .topbar-separator {
-      padding: 0 1rem;
-    }
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .topbar { padding: 0.6rem 1rem; }
+    .topbar-separator { padding: 0 1rem; }
+    .topbar-nav { display: none; }
+    .hamburger { display: flex; }
   }
 </style>
