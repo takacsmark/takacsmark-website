@@ -34,7 +34,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
       // Apply theme immediately to prevent flash
       (function() {
         const theme = localStorage.getItem('theme');
-        if (theme === 'dark') {
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark-mode');
         }
       })();
@@ -71,7 +71,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 
         // Sync checkbox with saved theme
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           themeCheck.checked = true;
         }
 

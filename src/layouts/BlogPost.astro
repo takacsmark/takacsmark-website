@@ -46,7 +46,7 @@ const { Content } = await render(post);
       // Apply theme immediately to prevent flash
       (function() {
         const theme = localStorage.getItem('theme');
-        if (theme === 'dark') {
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark-mode');
         }
       })();
@@ -158,7 +158,7 @@ const { Content } = await render(post);
 
         // Sync checkbox with saved theme
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           themeCheck.checked = true;
         }
 
