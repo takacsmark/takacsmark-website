@@ -1,34 +1,31 @@
 ---
 // src/pages/blog.astro
 import { getCollection } from 'astro:content';
-import TopBar from '../components/TopBar.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import Article from '../components/Article.astro';
 
 const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Blog - Mark Takács</title>
-    <meta name="description" content="All posts on my blog" />
-    <link rel="stylesheet" href="../styles/tailwind.css" />
-  </head>
-  <body>
-    <TopBar />
+<BaseLayout title="Blog | Mark Takács" description="All posts by Mark Takács.">
+  <div class="layout">
+    <main id="writing">
+      {sortedPosts.map(post => (
+        <Article post={post} />
+      ))}
+    </main>
+  </div>
+</BaseLayout>
 
-    <div class="layout">
-      <main id="writing">
-        <h2 class="sec-label">Writing</h2>
-        {posts.map(post => (
-          <Article post={post} />
-        ))}
-      </main>
-    </div>
+<style>
+  .layout {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
 
-    <Footer />
-  </body>
-</html>
+  @media (max-width: 768px) {
+    .layout { padding: 1.5rem 1rem 3rem; }
+  }
+</style>

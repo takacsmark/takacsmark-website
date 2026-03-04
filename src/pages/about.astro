@@ -1,17 +1,10 @@
 ---
 // src/pages/about.astro
-import TopBar from '../components/TopBar.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>About | Mark Takács</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="description" content="Learn more about Mark Takács - indie AI researcher, builder, writer, and thinker on human existence." />
+<BaseLayout title="About | Mark Takács" description="Learn more about Mark Takács - indie AI researcher, builder, writer, and thinker on human existence.">
+  <Fragment slot="head">
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
@@ -21,212 +14,72 @@ import Footer from '../components/Footer.astro';
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="About | Mark Takács" />
     <meta name="twitter:description" content="Learn more about Mark Takács - indie AI researcher, builder, writer, and thinker on human existence." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=Bungee&display=swap" rel="stylesheet">
-    <script is:inline>
-      // Apply theme immediately to prevent flash
-      (function() {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark-mode');
-        }
-      })();
-    </script>
-  </head>
-  <body>
-    <TopBar />
+  </Fragment>
 
-    <div class="about-header">
-      <div class="prompt-line">
-        <span class="p-char">$</span>
-        <span class="p-cmd">cat</span>
-        <span class="p-arg">~/about.txt</span>
-      </div>
-      <h1 class="page-title"><span class="title-accent">About</span></h1>
-      <hr class="header-rule">
+  <div class="about-header">
+    <div class="prompt-line">
+      <span class="p-char">$</span>
+      <span class="p-cmd">cat</span>
+      <span class="p-arg">~/about.txt</span>
     </div>
+    <h1 class="page-title"><span class="title-accent">About</span></h1>
+    <hr class="header-rule">
+  </div>
 
-    <div class="layout">
-      <main class="about-content">
-        <section class="about-section">
-          <h2 class="section-title">// Who I Am</h2>
-          <p>I'm Mark Takács, an indie AI researcher, builder, and writer based in Budapest. I spend my time exploring the intersection of artificial intelligence, psychology, and what it means to be human in an age of intelligent machines.</p>
-        </section>
+  <div class="layout">
+    <main class="about-content">
+      <section class="about-section">
+        <h2 class="section-title">// Who I Am</h2>
+        <p>I'm Mark Takács, an indie AI researcher, builder, and writer based in Budapest. I spend my time exploring the intersection of artificial intelligence, psychology, and what it means to be human in an age of intelligent machines.</p>
+      </section>
 
-        <section class="about-section">
-          <h2 class="section-title">// What I Do</h2>
-          <p>I build AI systems, conduct independent research, and write about the philosophical implications of our technological future. My work focuses on understanding intelligence—both artificial and human—from first principles.</p>
-          <p>Recent projects include quantizing multilingual language models, simulating agent dialogues, and exploring the cognitive patterns that emerge when systems start to break down.</p>
-        </section>
+      <section class="about-section">
+        <h2 class="section-title">// What I Do</h2>
+        <p>I build AI systems, conduct independent research, and write about the philosophical implications of our technological future. My work focuses on understanding intelligence—both artificial and human—from first principles.</p>
+        <p>Recent projects include quantizing multilingual language models, simulating agent dialogues, and exploring the cognitive patterns that emerge when systems start to break down.</p>
+      </section>
 
-        <section class="about-section">
-          <h2 class="section-title">// What I Think About</h2>
-          <p>The questions that drive my work aren't purely technical. I'm interested in:</p>
-          <ul>
-            <li>How AI challenges our assumptions about consciousness and understanding</li>
-            <li>The psychological patterns we share with the systems we build</li>
-            <li>What trauma and adaptation teach us about intelligent behavior</li>
-            <li>The gap between simulation and genuine comprehension</li>
-            <li>How we construct meaning in systems designed to process patterns</li>
-          </ul>
-        </section>
+      <section class="about-section">
+        <h2 class="section-title">// What I Think About</h2>
+        <p>The questions that drive my work aren't purely technical. I'm interested in:</p>
+        <ul>
+          <li>How AI challenges our assumptions about consciousness and understanding</li>
+          <li>The psychological patterns we share with the systems we build</li>
+          <li>What trauma and adaptation teach us about intelligent behavior</li>
+          <li>The gap between simulation and genuine comprehension</li>
+          <li>How we construct meaning in systems designed to process patterns</li>
+        </ul>
+      </section>
 
-        <section class="about-section">
-          <h2 class="section-title">// Get in Touch</h2>
-          <p>I'm always interested in conversations about AI, consciousness, and the philosophical implications of what we're building.</p>
-          <div class="contact-links">
-            <a href="mailto:mark@takacsmark.com" class="contact-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              mark@takacsmark.com
-            </a>
-            <a href="https://savalera.com" target="_blank" rel="noopener" class="contact-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
-              Savalera
-            </a>
-            <a href="https://github.com/takacsmark" target="_blank" rel="noopener" class="contact-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
-            </a>
-            <a href="https://x.com/takacsmark" target="_blank" rel="noopener" class="contact-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              X / Twitter
-            </a>
-            <a href="https://www.linkedin.com/in/takacsmark/" target="_blank" rel="noopener" class="contact-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-              LinkedIn
-            </a>
-          </div>
-        </section>
-      </main>
-    </div>
-
-    <Footer />
-
-    <script is:inline>
-      // Theme toggle handler
-      document.addEventListener('DOMContentLoaded', function() {
-        const themeCheck = document.getElementById('theme-check');
-
-        // Sync checkbox with saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          themeCheck.checked = true;
-        }
-
-        // Toggle theme on change
-        themeCheck?.addEventListener('change', function() {
-          if (this.checked) {
-            localStorage.setItem('theme', 'dark');
-            document.documentElement.classList.add('dark-mode');
-          } else {
-            localStorage.setItem('theme', 'light');
-            document.documentElement.classList.remove('dark-mode');
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
-
-<style is:global>
-  /* ── RESET ── */
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* ── CSS CUSTOM PROPERTIES ── */
-  :root {
-    --bg:       #ffffff;
-    --bg2:      #f5f5f7;
-    --ink:      #28282e;
-    --ink2:     #4c4f69;
-    --ink3:     #9ca0b0;
-    --rule:     #e0e0e8;
-
-    /* Charm / Bubbletea accent palette */
-    --pink:     #ea76cb;
-    --mauve:    #8839ef;
-    --teal:     #179299;
-    --sapphire: #00d4f5;
-    --green:    #40a02b;
-    --peach:    #fe640b;
-    --lavender: #7287fd;
-
-    --mono: 'JetBrains Mono', 'Courier New', monospace;
-    --serif: 'Source Serif 4', Georgia, serif;
-    --bungee: 'Bungee', sans-serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--mono);
-    font-size: 13.5px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  /* ── DARK MODE ── */
-  .dark-mode,
-  body:has(#theme-check:checked) {
-    --bg:   #1e1e2e;
-    --bg2:  #2a2a3d;
-    --ink:  #f0f0f4;
-    --ink2: #e0e0ea;
-    --ink3: #c0c0cc;
-    --rule: #313244;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.25; }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .topbar {
-      padding: 0.35rem 1.5rem;
-    }
-
-    .about-header {
-      padding: 1.5rem 1rem 0;
-    }
-
-    .layout {
-      padding: 1.5rem 1rem 3rem;
-    }
-
-    footer {
-      flex-direction: column;
-      gap: 0.8rem;
-      text-align: center;
-      padding: 0.7rem 1.5rem;
-    }
-
-    footer .fr {
-      justify-content: center;
-    }
-  }
-</style>
+      <section class="about-section">
+        <h2 class="section-title">// Get in Touch</h2>
+        <p>I'm always interested in conversations about AI, consciousness, and the philosophical implications of what we're building.</p>
+        <div class="contact-links">
+          <a href="mailto:mark@takacsmark.com" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            mark@takacsmark.com
+          </a>
+          <a href="https://savalera.com" target="_blank" rel="noopener" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
+            Savalera
+          </a>
+          <a href="https://github.com/takacsmark" target="_blank" rel="noopener" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="https://x.com/takacsmark" target="_blank" rel="noopener" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X / Twitter
+          </a>
+          <a href="https://www.linkedin.com/in/takacsmark/" target="_blank" rel="noopener" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+</BaseLayout>
 
 <style>
   .about-header {
@@ -359,5 +212,10 @@ import Footer from '../components/Footer.astro';
 
   .contact-link svg {
     flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .about-header { padding: 1.5rem 1rem 0; }
+    .layout { padding: 1.5rem 1rem 3rem; }
   }
 </style>

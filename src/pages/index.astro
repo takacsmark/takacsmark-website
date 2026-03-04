@@ -1,9 +1,8 @@
 ---
 // src/pages/index.astro
 import { getCollection } from 'astro:content';
-import TopBar from '../components/TopBar.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import Footer from '../components/Footer.astro';
 import Article from '../components/Article.astro';
 
 const posts = await getCollection('blog');
@@ -12,14 +11,8 @@ const featuredPost = sortedPosts[0];
 const otherPosts = sortedPosts.slice(1);
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Mark Takács</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="description" content="Indie AI researcher, builder, writer, and thinker on human existence." />
+<BaseLayout title="Mark Takács" description="Indie AI researcher, builder, writer, and thinker on human existence.">
+  <Fragment slot="head">
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
@@ -40,163 +33,36 @@ const otherPosts = sortedPosts.slice(1);
         "name": "Mark Takács"
       }
     })} />
-    <link rel="alternate" type="application/rss+xml" title="Mark Takács" href="/rss.xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Bungee&display=swap" rel="stylesheet">
-    <script is:inline>
-      // Apply theme immediately to prevent flash
-      (function() {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark-mode');
-        }
-      })();
-    </script>
-  </head>
-  <body>
-    <TopBar />
-    <Hero />
+    <link rel="alternate" type="application/rss+xml" title="Mark Takács" href="/rss.xml" />
+  </Fragment>
 
-    <div class="layout">
-      <main id="writing">
-        {featuredPost && <Article post={featuredPost} featured={true} />}
-        {otherPosts.map(post => (
-          <Article post={post} />
-        ))}
-        <a href="/writing" class="more-btn">view all entries</a>
-      </main>
-    </div>
+  <Hero />
 
-    <Footer />
-
-    <script is:inline>
-      // Theme toggle handler
-      document.addEventListener('DOMContentLoaded', function() {
-        const themeCheck = document.getElementById('theme-check');
-
-        // Sync checkbox with saved theme or system preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          themeCheck.checked = true;
-        }
-
-        // Toggle theme on change
-        themeCheck?.addEventListener('change', function() {
-          if (this.checked) {
-            localStorage.setItem('theme', 'dark');
-            document.documentElement.classList.add('dark-mode');
-          } else {
-            localStorage.setItem('theme', 'light');
-            document.documentElement.classList.remove('dark-mode');
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
+  <div class="layout">
+    <main id="writing">
+      {featuredPost && <Article post={featuredPost} featured={true} />}
+      {otherPosts.map(post => (
+        <Article post={post} />
+      ))}
+      <a href="/writing" class="more-btn">view all entries</a>
+    </main>
+  </div>
+</BaseLayout>
 
 <style is:global>
-  /* ── RESET ── */
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* ── CSS CUSTOM PROPERTIES ── */
+  /* index uses DM Sans as body font instead of JetBrains Mono */
   :root {
-    --bg:       #ffffff;
-    --bg2:      #f5f5f7;
-    --ink:      #1e1e2e;
-    --ink2:     #4c4f69;
-    --ink3:     #9ca0b0;
-    --rule:     #e0e0e8;
-
-    /* Charm / Bubbletea accent palette */
-    --pink:     #ea76cb;
-    --mauve:    #8839ef;
-    --teal:     #179299;
-    --sapphire: #00d4f5;
-    --green:    #40a02b;
-    --peach:    #fe640b;
-    --lavender: #7287fd;
-
     --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', 'Courier New', monospace;
-    --bungee: 'Bungee', sans-serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 
   body {
-    background: var(--bg);
-    color: var(--ink);
     font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
 
-  /* ── DARK MODE ── */
-  .dark-mode,
-  body:has(#theme-check:checked) {
-    --bg:   #1e1e2e;
-    --bg2:  #2a2a3d;
-    --ink:  #f0f0f4;
-    --ink2: #e0e0ea;
-    --ink3: #c0c0cc;
-    --rule: #313244;
-  }
-
-  /* ── CURSOR ── */
-  a, button, [role="button"],
-  .post-row, .post-featured, .tag, .side-tag {
-    cursor: pointer;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.25; }
-  }
-
-  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .topbar {
-      padding: 0.35rem 1.5rem;
-    }
-
-    header {
-      padding: 2rem 1.5rem 0;
-    }
-
-    .layout {
-      padding: 1.5rem 1rem 3rem;
-    }
-
-    footer {
-      flex-direction: column;
-      gap: 0.4rem;
-      text-align: center;
-    }
-
-    footer .fr {
-      justify-content: center;
-    }
+    header { padding: 2rem 1.5rem 0; }
   }
 </style>
 
@@ -225,4 +91,8 @@ const otherPosts = sortedPosts.slice(1);
 
   .more-btn:hover { color: var(--sapphire); }
   .more-btn::before { content: '→'; color: var(--sapphire); }
+
+  @media (max-width: 768px) {
+    .layout { padding: 1.5rem 1rem 3rem; }
+  }
 </style>

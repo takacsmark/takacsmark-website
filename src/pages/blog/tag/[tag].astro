@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import TopBar from '../../../components/TopBar.astro';
-import Footer from '../../../components/Footer.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Article from '../../../components/Article.astro';
 import { getTagStyle } from '../../../utils/tagColor';
 
@@ -30,111 +29,46 @@ const { tagLabel, posts } = Astro.props;
 const { tag } = Astro.params;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>#{tagLabel} | Mark Takács</title>
-    <meta name="description" content={`All posts tagged ${tagLabel} by Mark Takács.`} />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=Bungee&display=swap" rel="stylesheet">
-    <script is:inline>
-      (function() {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'dark') document.documentElement.classList.add('dark-mode');
-      })();
-    </script>
-  </head>
-  <body>
-    <TopBar />
+<BaseLayout title={`#${tagLabel} | Mark Takács`} description={`All posts tagged ${tagLabel} by Mark Takács.`}>
+  <Fragment slot="head">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`#${tagLabel} | Mark Takács`} />
+    <meta property="og:description" content={`All posts tagged ${tagLabel} by Mark Takács.`} />
+    <meta property="og:site_name" content="Mark Takács" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`#${tagLabel} | Mark Takács`} />
+    <meta name="twitter:description" content={`All posts tagged ${tagLabel} by Mark Takács.`} />
+  </Fragment>
 
-    <div class="tag-header">
-      <nav class="breadcrumb">
-        <a href="/" class="breadcrumb-link"><span class="p-char">~</span></a>
-        <span class="breadcrumb-sep">/</span>
-        <a href="/writing" class="breadcrumb-link">writing</a>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-current">#{tag}</span>
-      </nav>
+  <div class="tag-header">
+    <nav class="breadcrumb">
+      <a href="/" class="breadcrumb-link"><span class="p-char">~</span></a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="/writing" class="breadcrumb-link">writing</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">#{tag}</span>
+    </nav>
 
-      <div class="prompt-line">
-        <span class="p-char">$</span>
-        <span class="p-cmd">grep</span>
-        <span class="p-flag">-r</span>
-        <span class="p-arg">"{tag}"</span>
-        <span class="p-path">~/writing/</span>
-      </div>
-      <h1 class="page-title"><span class="title-dim">#{tagLabel}</span></h1>
-      <p class="page-subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged <span class="tag" style={getTagStyle(tag)}>{tagLabel}</span></p>
-      <hr class="header-rule">
+    <div class="prompt-line">
+      <span class="p-char">$</span>
+      <span class="p-cmd">grep</span>
+      <span class="p-flag">-r</span>
+      <span class="p-arg">"{tag}"</span>
+      <span class="p-path">~/writing/</span>
     </div>
+    <h1 class="page-title"><span class="title-dim">#{tagLabel}</span></h1>
+    <p class="page-subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged <span class="tag" style={getTagStyle(tag)}>{tagLabel}</span></p>
+    <hr class="header-rule">
+  </div>
 
-    <div class="layout">
-      <main>
-        {posts.map(post => (
-          <Article post={post} />
-        ))}
-      </main>
-    </div>
-
-    <Footer />
-
-    <script is:inline>
-      document.addEventListener('DOMContentLoaded', function() {
-        const themeCheck = document.getElementById('theme-check');
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') themeCheck.checked = true;
-        themeCheck?.addEventListener('change', function() {
-          if (this.checked) {
-            localStorage.setItem('theme', 'dark');
-            document.documentElement.classList.add('dark-mode');
-          } else {
-            localStorage.setItem('theme', 'light');
-            document.documentElement.classList.remove('dark-mode');
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
-
-<style is:global>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #ffffff; --bg2: #f5f5f7; --ink: #1e1e2e; --ink2: #4c4f69; --ink3: #9ca0b0; --rule: #e0e0e8;
-    --pink: #ea76cb; --mauve: #8839ef; --teal: #179299; --sapphire: #00d4f5;
-    --green: #40a02b; --peach: #fe640b; --lavender: #7287fd;
-    --mono: 'JetBrains Mono', 'Courier New', monospace;
-    --serif: 'Source Serif 4', Georgia, serif;
-    --bungee: 'Bungee', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg); color: var(--ink); font-family: var(--mono);
-    font-size: 13.5px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
-  }
-
-  .dark-mode, body:has(#theme-check:checked) {
-    --bg: #1e1e2e; --bg2: #2a2a3d; --ink: #f0f0f4; --ink2: #e0e0ea; --ink3: #c0c0cc; --rule: #313244;
-  }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
-
-  @media (max-width: 768px) {
-    .topbar { padding: 0.35rem 1.5rem; }
-    .tag-header { padding: 1.5rem 1rem 0; }
-    .layout { padding: 1.5rem 1rem 3rem; }
-    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
-    footer .fr { justify-content: center; }
-  }
-</style>
+  <div class="layout">
+    <main>
+      {posts.map(post => (
+        <Article post={post} />
+      ))}
+    </main>
+  </div>
+</BaseLayout>
 
 <style>
   .tag-header {
@@ -211,7 +145,6 @@ const { tag } = Astro.params;
     text-transform: uppercase;
   }
 
-
   .header-rule {
     border: none;
     border-top: 1px solid var(--rule);
@@ -222,5 +155,10 @@ const { tag } = Astro.params;
     max-width: 768px;
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .tag-header { padding: 1.5rem 1rem 0; }
+    .layout { padding: 1.5rem 1rem 3rem; }
   }
 </style>
