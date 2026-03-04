@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bungee&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="32" height="32" rx="5" fill="#1e1e2e"/>
+  <text
+    font-family="Bungee, Impact, sans-serif"
+    font-size="20"
+    font-weight="400"
+    text-anchor="middle"
+    dominant-baseline="central"
+    x="16"
+    y="16"
+  ><tspan fill="#f0f0f4">M</tspan><tspan fill="#00d4f5">T</tspan></text>
+</svg>

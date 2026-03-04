@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://takacsmark.com/sitemap-index.xml

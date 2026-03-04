@@ -7,8 +7,9 @@ import Footer from '../components/Footer.astro';
 import Article from '../components/Article.astro';
 
 const posts = await getCollection('blog');
-const featuredPost = posts[0];
-const otherPosts = posts.slice(1);
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const featuredPost = sortedPosts[0];
+const otherPosts = sortedPosts.slice(1);
 ---
 
 <!DOCTYPE html>
@@ -17,7 +18,28 @@ const otherPosts = posts.slice(1);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Mark Takács</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content="Indie AI researcher, builder, writer, and thinker on human existence." />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:title" content="Mark Takács" />
+    <meta property="og:description" content="Indie AI researcher, builder, writer, and thinker on human existence." />
+    <meta property="og:site_name" content="Mark Takács" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Mark Takács" />
+    <meta name="twitter:description" content="Indie AI researcher, builder, writer, and thinker on human existence." />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Mark Takács",
+      "url": "https://takacsmark.com",
+      "description": "Indie AI researcher, builder, writer, and thinker on human existence.",
+      "author": {
+        "@type": "Person",
+        "name": "Mark Takács"
+      }
+    })} />
     <link rel="alternate" type="application/rss+xml" title="Mark Takács" href="/rss.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
