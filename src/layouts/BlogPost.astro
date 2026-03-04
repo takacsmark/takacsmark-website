@@ -3,6 +3,7 @@ import TopBar from '../components/TopBar.astro';
 import Footer from '../components/Footer.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
 import { render } from 'astro:content';
+import { getTagStyle } from '../utils/tagColor';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await render(post);
@@ -89,7 +90,7 @@ const { Content } = await render(post);
     {post.data.tags && post.data.tags.length > 0 && (
       <div class="bottom-tags">
         {post.data.tags.map(tag => (
-          <a href={`/blog/tag/${tag.toLowerCase()}`} class={`tag tag-${tag.toLowerCase()}`}>{tag}</a>
+          <a href={`/blog/tag/${tag.toLowerCase()}`} class="tag" style={getTagStyle(tag)}>{tag}</a>
         ))}
       </div>
     )}
@@ -382,15 +383,6 @@ const { Content } = await render(post);
     text-decoration: none;
   }
 
-  .tag-ai     { background: #e8f0ff; color: var(--lavender); border: 1px solid #c5d0f8; }
-  .tag-psych  { background: #f0fae8; color: var(--green);    border: 1px solid #c5e8b0; }
-  .tag-res    { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
-  .tag-research { background: #fff0f8; color: var(--pink);   border: 1px solid #f8c5e0; }
-  .tag-exist  { background: #f3efff; color: var(--mauve);    border: 1px solid #d5c5f8; }
-  .tag-existence { background: #f3efff; color: var(--mauve); border: 1px solid #d5c5f8; }
-  .tag-philosophy { background: #f3efff; color: var(--mauve); border: 1px solid #d5c5f8; }
-  .tag-tech   { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
-  .tag-work   { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
 
   .article-description {
     font-family: var(--mono);

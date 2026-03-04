@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import TopBar from '../../../components/TopBar.astro';
 import Footer from '../../../components/Footer.astro';
 import Article from '../../../components/Article.astro';
+import { getTagStyle } from '../../../utils/tagColor';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -66,7 +67,7 @@ const { tag } = Astro.params;
         <span class="p-path">~/writing/</span>
       </div>
       <h1 class="page-title"><span class="title-dim">#{tagLabel}</span></h1>
-      <p class="page-subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged <span class={`tag tag-${tag}`}>{tagLabel}</span></p>
+      <p class="page-subtitle">{posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged <span class="tag" style={getTagStyle(tag)}>{tagLabel}</span></p>
       <hr class="header-rule">
     </div>
 
@@ -210,15 +211,6 @@ const { tag } = Astro.params;
     text-transform: uppercase;
   }
 
-  .tag-ai       { background: #e8f0ff; color: var(--lavender); border: 1px solid #c5d0f8; }
-  .tag-psych    { background: #f0fae8; color: var(--green);    border: 1px solid #c5e8b0; }
-  .tag-res      { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
-  .tag-research { background: #fff0f8; color: var(--pink);     border: 1px solid #f8c5e0; }
-  .tag-exist    { background: #f3efff; color: var(--mauve);    border: 1px solid #d5c5f8; }
-  .tag-existence  { background: #f3efff; color: var(--mauve);  border: 1px solid #d5c5f8; }
-  .tag-philosophy { background: #f3efff; color: var(--mauve);  border: 1px solid #d5c5f8; }
-  .tag-tech     { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
-  .tag-work     { background: #e8f8ff; color: var(--sapphire); border: 1px solid #b8e0f0; }
 
   .header-rule {
     border: none;
