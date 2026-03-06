@@ -1,5 +1,6 @@
 ---
 title: "Blog Reboot"
+slug: "blog-reboot"
 description: "New chapter. AI research, indie work, leadership lessons, and the philosophical process underneath it all."
 pubDate: 2026-03-04
 tags:

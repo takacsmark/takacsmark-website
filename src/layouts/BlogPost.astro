@@ -128,6 +128,43 @@ const { Content } = await render(post);
     </nav>
   )}
 
+  <div id="lightbox" aria-hidden="true">
+    <button id="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <script>
+    const lb = document.getElementById('lightbox')!;
+    const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lbCaption = document.getElementById('lightbox-caption')!;
+
+    function openLightbox(src: string, alt: string) {
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lbCaption.textContent = alt;
+      lbCaption.style.display = alt ? 'block' : 'none';
+      lb.classList.add('active');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('active');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    document.querySelectorAll<HTMLImageElement>('.article-content img').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    });
+
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.getElementById('lightbox-close')!.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
   <script is:inline>
     // Share links
     document.addEventListener('DOMContentLoaded', function() {
@@ -378,6 +415,78 @@ const { Content } = await render(post);
     border-radius: 4px;
     border: 1px solid var(--rule);
     margin: 1.5rem 0;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+
+  .article-content :global(img:hover) {
+    opacity: 0.88;
+  }
+
+  /* ── LIGHTBOX ── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.88);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    cursor: zoom-out;
+  }
+
+  #lightbox.active {
+    display: flex;
+    animation: fadeIn 0.18s ease;
+  }
+
+  #lightbox-img {
+    max-width: 98vw;
+    max-height: 94vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: default;
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+  }
+
+  #lightbox-caption {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.04em;
+    text-align: center;
+    max-width: 600px;
+    cursor: default;
+  }
+
+  #lightbox-close {
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1.4rem;
+    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    border-radius: 2px;
+  }
+
+  #lightbox-close:hover {
+    border-color: var(--pink);
+    color: var(--pink);
   }
 
   .article-content :global(table) {

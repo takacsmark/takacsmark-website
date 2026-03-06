@@ -1,3 +1,6 @@
 # Astro config
 node_modules
 dist
+.DS_Store
+.astro/
+.claude/
