@@ -10,7 +10,7 @@ You see more and more companies claim that they went 100% AI code now. I took a 
 
 As [Peter Steinberger](https://x.com/steipete), the creator of OpenClaw, put it: "I ship code I don't read." Let's see how that goes. 😲
 
-## First, there was the hybrid approach
+## First, I had the hybrid approach
 
 Here you build point features with AI in the form of functions, classes, methods, and such. You still stitch all this together mostly manually.
 
@@ -24,7 +24,7 @@ Nonetheless, rapid prototyping brought down my rapid-prototyping times from days
 
 ![Savalera Agents Hub](./savalera-agents-hub.png)
 
-## How is the factory approach different?
+## How is the factory different?
 
 The factory approach is a big step forward.
 
@@ -72,4 +72,4 @@ You really feel limitless and you can become insanely productive keeping a few t
 - Both Codex and Claude can hallucinate fixes. Sometimes you just have to iterate many times to delete a few words from the UI. It's not perfect.
 - Codex tends to create spaghetti code. It'll branch out with if statements rather than separating concerns. But it's good at refactoring, so just refactor.
 
-Having said this you'll see insane productivity improvement. Especially once you take the leap of faith and let go. The moment you stop thinking like a developer and start thinking like a delivery executive — minimizing rework, shortening time to market, managing quality — you realize this isn't about AI doing your job. It's about you finally working at the level you were always supposed to.
+Having said this, you'll see insane productivity improvement. Especially once you take the leap of faith and let go. Don't try to control everything, just build your dreams.
