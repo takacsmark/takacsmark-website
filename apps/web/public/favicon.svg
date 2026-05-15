@@ -1,17 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Bungee&amp;display=swap');
-    </style>
-  </defs>
-  <rect width="32" height="32" rx="5" fill="#1e1e2e"/>
-  <text
-    font-family="Bungee, Impact, sans-serif"
-    font-size="20"
-    font-weight="400"
-    text-anchor="middle"
-    dominant-baseline="central"
-    x="16"
-    y="16"
-  ><tspan fill="#f0f0f4">M</tspan><tspan fill="#00d4f5">T</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- green circle, transparent background -->
+  <circle cx="50" cy="50" r="48" fill="#a3e635"/>
+  <!-- pixel-art lowercase t (8px grid) -->
+  <!-- stem above crossbar -->
+  <rect x="38" y="22" width="8" height="16" fill="black"/>
+  <!-- crossbar -->
+  <rect x="30" y="38" width="40" height="8" fill="black"/>
+  <!-- stem below crossbar -->
+  <rect x="38" y="46" width="8" height="24" fill="black"/>
+  <!-- foot -->
+  <rect x="46" y="70" width="16" height="8" fill="black"/>
 </svg>

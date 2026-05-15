@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     template: '%s | Mark Takács',
   },
   description: 'Indie AI researcher, builder, writer, and thinker on human existence.',
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     siteName: 'Mark Takács',
     type: 'website',
