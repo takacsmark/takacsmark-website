@@ -5,6 +5,7 @@ export const blog = defineCollections({
   type: 'doc',
   dir: 'content/blog',
   schema: z.object({
+    slug: z.string(),
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
