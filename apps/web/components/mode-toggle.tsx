@@ -23,7 +23,7 @@ export function ModeToggle() {
   const { theme, setTheme } = useTheme();
 
   const current = cycle.includes(theme as Theme) ? (theme as Theme) : 'system';
-  const next = cycle[(cycle.indexOf(current) + 1) % cycle.length];
+  const next: Theme = cycle[(cycle.indexOf(current) + 1) % cycle.length] ?? 'system';
 
   return (
     <Button variant="ghost" size="icon" onClick={() => setTheme(next)} aria-label={labels[next]}>
