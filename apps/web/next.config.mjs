@@ -10,6 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   transpilePackages: ['@workspace/ui'],
+  devIndicators: false,
 };
 
 export default withMDX(nextConfig);

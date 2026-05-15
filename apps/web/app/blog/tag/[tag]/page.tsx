@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { Separator } from '@workspace/ui/components/separator';
-import { PostCard } from '@/components/post-card';
+import { Badge } from '@workspace/ui/components/badge';
 import { getAllTags, getPostsByTag, getTagLabel } from '@/lib/posts';
 
 interface Props {
@@ -48,9 +49,32 @@ export default async function TagPage({ params }: Props) {
 
       <Separator className="mb-8" />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         {posts.map((post) => (
-          <PostCard key={post.url} post={post} />
+          <Link key={post.url} href={post.url} className="block group hover:no-underline">
+            <p className="text-xs text-muted-foreground mb-1">
+              {post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <h2 className="text-lg font-semibold leading-snug mb-1 group-hover:text-primary transition-colors">
+              {post.data.title}
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+              {post.data.description}
+            </p>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {post.data.tags.map((t) => (
+                  <Badge key={t} variant="secondary" className="text-xs">
+                    {t}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </Link>
         ))}
       </div>
     </div>

@@ -110,7 +110,7 @@ export default async function BlogPostPage({ params }: Props) {
         <Separator className="mb-8" />
 
         {/* Content */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
+        <div className="prose dark:prose-invert max-w-none">
           <MDXContent components={getMDXComponents()} />
         </div>
 

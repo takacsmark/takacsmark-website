@@ -23,7 +23,7 @@ export function SiteHeader() {
     <header className="border-b sticky top-0 z-50 bg-background">
       <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link href="/" className="font-semibold text-sm hover:opacity-80 transition-opacity">
-          Mark Takács
+          takacsmark.com
         </Link>
 
         {/* Desktop nav */}

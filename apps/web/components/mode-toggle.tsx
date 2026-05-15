@@ -1,32 +1,33 @@
 'use client';
 
-import { Moon, Sun } from 'lucide-react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '@workspace/ui/components/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@workspace/ui/components/dropdown-menu';
+
+const cycle = ['system', 'light', 'dark'] as const;
+type Theme = (typeof cycle)[number];
+
+const icons: Record<Theme, React.ReactNode> = {
+  system: <Monitor className="h-[1.2rem] w-[1.2rem]" />,
+  light: <Sun className="h-[1.2rem] w-[1.2rem]" />,
+  dark: <Moon className="h-[1.2rem] w-[1.2rem]" />,
+};
+
+const labels: Record<Theme, string> = {
+  system: 'System theme',
+  light: 'Light theme',
+  dark: 'Dark theme',
+};
 
 export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  const current = cycle.includes(theme as Theme) ? (theme as Theme) : 'system';
+  const next = cycle[(cycle.indexOf(current) + 1) % cycle.length];
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 dark:scale-0 transition-all" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 dark:scale-100 transition-all" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button variant="ghost" size="icon" onClick={() => setTheme(next)} aria-label={labels[next]}>
+      {icons[current]}
+    </Button>
   );
 }

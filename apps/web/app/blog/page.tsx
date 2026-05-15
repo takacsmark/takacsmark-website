@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Separator } from '@workspace/ui/components/separator';
-import { PostCard } from '@/components/post-card';
+import Link from 'next/link';
+import { Badge } from '@workspace/ui/components/badge';
 import { getAllPosts } from '@/lib/posts';
 
 export const metadata: Metadata = {
@@ -26,14 +26,32 @@ export default function BlogPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-3">Blog</h1>
-      <p className="text-muted-foreground mb-8">{posts.length} posts</p>
-
-      <Separator className="mb-8" />
-
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         {posts.map((post) => (
-          <PostCard key={post.url} post={post} />
+          <Link key={post.url} href={post.url} className="block group hover:no-underline">
+            <p className="text-xs text-muted-foreground mb-1">
+              {post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <h2 className="text-lg font-semibold leading-snug mb-1 group-hover:text-primary transition-colors">
+              {post.data.title}
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+              {post.data.description}
+            </p>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {post.data.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="text-xs">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </Link>
         ))}
       </div>
     </div>
